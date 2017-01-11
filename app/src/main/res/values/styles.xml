@@ -1,0 +1,26 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">#3F51B5</item>
+        <item name="colorPrimaryDark">#303F9F</item>
+        <item name="colorAccent">#FF4081</item>
+    </style>
+
+    <style name="TestView" >
+        <!-- Customize month picker theme here. -->n
+        <item name="monthBgColor">#FFFFFF</item>
+        <item name="monthBgSelectedColor">#FF4081</item>
+        <item name="monthFontColorSelected">#ffffff</item>
+        <item name="monthFontColorNormal">#000000</item>
+        <item name="monthFontColorDisabled">#33000000</item>
+
+        <item name="headerBgColor">#FF4081</item>
+        <item name="headerFontColorSelected">#ffffff</item>
+        <item name="headerFontColorNormal">#85ffffff</item>
+        <item name="headerTitleColor">#ffffff</item>
+
+    </style>
+
+</resources>

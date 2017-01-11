@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="months">
+        <item>"JAN"</item>
+        <item>"FEB"</item>
+        <item>"MAR"</item>
+        <item>"APR"</item>
+        <item>"MAY"</item>
+        <item>"JUN"</item>
+        <item>"JUL"</item>
+        <item>"AUG"</item>
+        <item>"SEP"</item>
+        <item>"OCT"</item>
+        <item>"NOV"</item>
+        <item>"DEC"</item>
+    </array>
+</resources>

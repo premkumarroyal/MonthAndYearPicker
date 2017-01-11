@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="monthPickerDialog">
+        <attr name="headerTitleColor" format="color" />
+        <attr name="headerBgColor" format="color" />
+        <attr name="headerFontColorSelected" format="color" />
+        <attr name="headerFontColorNormal" format="color" />
+
+        <attr name="monthBgColor" format="color" />
+        <attr name="monthBgSelectedColor" format="color" />
+        <attr name="monthFontColorSelected" format="color" />
+        <attr name="monthFontColorNormal" format="color" />
+        <attr name="monthFontColorDisabled" format="color" />
+
+    </declare-styleable>
+</resources>
