@@ -162,8 +162,8 @@ public class MonthPickerDialog extends AlertDialog implements OnClickListener, O
          * @param callBack MonthPickerDialog.OnDateSetListener: the listener to call
          *                 when the user sets the date
          * @param year     the initially selected year
-         * @param month    the initially selected month (0-11 for compatibility with Calender.MONTH or
-         *                 Calendar.JANUARY, Calendar.FEBRUARY etc)
+         * @param month    the initially selected month (0-11 for compatibility with
+         * {@link Calendar}Calender.MONTH or Calendar.JANUARY, Calendar.FEBRUARY etc)
          */
 
         public Builder(Context context,
@@ -404,9 +404,9 @@ public class MonthPickerDialog extends AlertDialog implements OnClickListener, O
     public interface OnDateSetListener {
         /**
          * @param view          The view associated with this listener.
-         * @param selectedMonth The year that was set.
-         * @param selectedYear  The month that was set (0-11) for compatibility
-         *                      with {@link java.util.Calendar}.
+         * @param selectedMonth  The month that was set (0-11) for compatibility with {@link Calendar}.
+         * @param selectedYear The year that was set.
+         *
          */
         void onDateSet(TestView view, int selectedMonth, int selectedYear);
     }
@@ -417,7 +417,7 @@ public class MonthPickerDialog extends AlertDialog implements OnClickListener, O
     public interface OnMonthChangedListener {
         /**
          * @param selectedMonth The month that was set (0-11) for compatibility
-         *                      with {@link java.util.Calendar}.
+         *                      with {@link Calendar}.
          */
         void onMonthChanged(int selectedMonth);
     }

@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         yearView = (YearPickerView) findViewById(R.id.yearView);
 
        /* MyMonthViewAdapter monthViewAdapter = new MyMonthViewAdapter(this, null);
-        monthViewAdapter.setOnDaySelectedListener(new MyMonthViewAdapter.OnDaySelectedListener() {
+        monthViewAdapter.setOnDaySelectedListener(new MyMonthViewAdapter.OnMonthClickListener() {
             @Override
             public void onDaySelected(MyMonthViewAdapter view, int day) {
                 Log.d("----------------", "selected month = " + day);

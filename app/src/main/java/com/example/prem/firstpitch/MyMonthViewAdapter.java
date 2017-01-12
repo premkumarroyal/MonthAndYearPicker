@@ -2,9 +2,7 @@ package com.example.prem.firstpitch;
 
 import android.content.Context;
 import android.os.Build;
-import android.util.AttributeSet;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
@@ -21,7 +19,7 @@ public class MyMonthViewAdapter extends BaseAdapter {
     private OnDaySelectedListener mOnDaySelectedListener;
     private int _minMonth, _maxMonth, _activatedMonth;
     private Context context;
-    private HashMap<String,Integer> colors;
+    private HashMap<String, Integer> colors;
 
     public MyMonthViewAdapter(Context context) {
         this.context = context;
@@ -59,29 +57,8 @@ public class MyMonthViewAdapter extends BaseAdapter {
                     AbsListView.LayoutParams.MATCH_PARENT, AbsListView.LayoutParams.MATCH_PARENT);
             v.setLayoutParams(params);
             v.setClickable(true);
-            v.setOnDayClickListener(mOnDayClickListener);
+            v.setOnMonthClickListener(mOnDayClickListener);
         }
-        /*final int minMonth = mMinDate.get(Calendar.MONTH);
-        final int minYear = mMinDate.get(Calendar.YEAR);
-        final int currentMonth = position + minMonth;
-        final int month = currentMonth % 12;
-        final int year = currentMonth / 12 + minYear;
-        // Invokes requestLayout() to ensure that the recycled view is set with the appropriate
-        // height/number of weeks before being displayed.
-        v.reuse();
-        final int enabledDayRangeStart;
-        if (minMonth == month && minYear == year) {
-            enabledDayRangeStart = mMinDate.get(Calendar.DAY_OF_MONTH);
-        } else {
-            enabledDayRangeStart = 1;
-        }
-        final int enabledDayRangeEnd;
-        if (mMaxDate.get(Calendar.MONTH) == month && mMaxDate.get(Calendar.YEAR) == year) {
-            enabledDayRangeEnd = mMaxDate.get(Calendar.DAY_OF_MONTH);
-        } else {
-            enabledDayRangeEnd = 31;
-        }*/
-        //  v.setMonthParams(selectedDay, month, year, mFirstDayOfWeek, enabledDayRangeStart, enabledDayRangeEnd);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             // If we're running on Honeycomb or newer, then we can use the Theme's
             // selectableItemBackground to ensure that the View has a pressed state
@@ -93,9 +70,9 @@ public class MyMonthViewAdapter extends BaseAdapter {
         return v;
     }
 
-    private final MyMonthView.OnDayClickListener mOnDayClickListener = new MyMonthView.OnDayClickListener() {
+    private final MyMonthView.OnMonthClickListener mOnDayClickListener = new MyMonthView.OnMonthClickListener() {
         @Override
-        public void onDayClick(MyMonthView view, int day) {
+        public void onMonthClick(MyMonthView view, int day) {
             Log.d("MyMonthViewAdapter", "onDayClick " + day);
             if (isCalendarInRange(day)) {
                 Log.d("MyMonthViewAdapter", "day not null && Calender in range " + day);
@@ -130,10 +107,6 @@ public class MyMonthViewAdapter extends BaseAdapter {
         _activatedMonth = Calendar.AUGUST;
         notifyDataSetInvalidated();
     }
-
-    /*private boolean isSelectedDayInMonth(int year, int month) {
-        return mSelectedDay.get(Calendar.YEAR) == year && mSelectedDay.get(Calendar.MONTH) == month;
-    }*/
 
     /**
      * Sets the listener to call when the user selects a day.
