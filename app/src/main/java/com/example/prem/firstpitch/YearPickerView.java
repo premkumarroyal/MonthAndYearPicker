@@ -20,12 +20,13 @@ import java.util.HashMap;
  * Displays a selectable list of years.
  */
 public class YearPickerView extends ListView {
-    private final YearAdapter mAdapter;
-    private final int mViewSize;
-    private final int mChildSize;
-    private OnYearSelectedListener mOnYearSelectedListener;
-    private Context context;
-    HashMap<String,Integer> colors;
+
+    private Context _context;
+    private final YearAdapter _adapter;
+    private final int _viewSize;
+    private final int _childSize;
+    private OnYearSelectedListener _onYearSelectedListener;
+    HashMap<String,Integer> _colors;
 
     public YearPickerView(Context context){
         this(context,null);
@@ -36,29 +37,29 @@ public class YearPickerView extends ListView {
 
     public YearPickerView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        this.context = context;
+        this._context = context;
         final LayoutParams frame = new LayoutParams(
                 LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
         setLayoutParams(frame);
         final Resources res = context.getResources();
-        mViewSize = res.getDimensionPixelOffset(R.dimen.datepicker_view_animator_height);
-        mChildSize = res.getDimensionPixelOffset(R.dimen.datepicker_year_label_height);
+        _viewSize = res.getDimensionPixelOffset(R.dimen.datepicker_view_animator_height);
+        _childSize = res.getDimensionPixelOffset(R.dimen.datepicker_year_label_height);
         setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                final int year = mAdapter.getYearForPosition(position);
-                mAdapter.setSelection(year);
-                if (mOnYearSelectedListener != null) {
-                    mOnYearSelectedListener.onYearChanged(YearPickerView.this, year);
+                final int year = _adapter.getYearForPosition(position);
+                _adapter.setSelection(year);
+                if (_onYearSelectedListener != null) {
+                    _onYearSelectedListener.onYearChanged(YearPickerView.this, year);
                 }
             }
         });
-        mAdapter = new YearAdapter(getContext());
-        setAdapter(mAdapter);
+        _adapter = new YearAdapter(getContext());
+        setAdapter(_adapter);
     }
 
     public void setOnYearSelectedListener(OnYearSelectedListener listener) {
-        mOnYearSelectedListener = listener;
+        _onYearSelectedListener = listener;
     }
 
     /**
@@ -67,11 +68,11 @@ public class YearPickerView extends ListView {
      * @param year the target year
      */
     public void setYear(final int year) {
-        mAdapter.setSelection(year);
+        _adapter.setSelection(year);
         post(new Runnable() {
             @Override
             public void run() {
-                final int position = mAdapter.getPositionForYear(year);
+                final int position = _adapter.getPositionForYear(year);
                 if (position >= 0 /*&& position < getCount()*/) {
                     setSelectionCentered(position);
                 }
@@ -80,16 +81,16 @@ public class YearPickerView extends ListView {
     }
 
     public void setSelectionCentered(int position) {
-        final int offset = mViewSize / 2 - mChildSize / 2;
+        final int offset = _viewSize / 2 - _childSize / 2;
         setSelectionFromTop(position, offset);
     }
 
     public void setRange(int min, int max) {
-        mAdapter.setRange(min, max);
+        _adapter.setRange(min, max);
     }
 
     public void setColors(HashMap<String,Integer> colors) {
-        this.colors = colors;
+        this._colors = colors;
     }
 
     private class YearAdapter extends BaseAdapter {
@@ -164,10 +165,10 @@ public class YearPickerView extends ListView {
             // if (hasNewView || v.isActivated() != activated) {
             if (hasNewView || v.getTag() != null || v.getTag().equals(activated)) {
                 if (activated) {
-                    v.setTextColor(colors.get("monthBgSelectedColor"));
+                    v.setTextColor(_colors.get("monthBgSelectedColor"));
                     v.setTextSize(25);
                 } else {
-                    v.setTextColor(colors.get("monthFontColorNormal"));
+                    v.setTextColor(_colors.get("monthFontColorNormal"));
                     v.setTextSize(20);
                 }
                 // v.setActivated(activated);
@@ -253,13 +254,13 @@ public class YearPickerView extends ListView {
     }
 
     protected void setMinYear(int minYear){
-        mAdapter.setMinYear(minYear);
+        _adapter.setMinYear(minYear);
     }
 
     protected void setMaxYear(int maxYear){
-        mAdapter.setMaxYear(maxYear);
+        _adapter.setMaxYear(maxYear);
     }
 
-    protected void setActivatedYear(int activatedYear){ mAdapter.setActivatedYear(activatedYear); }
+    protected void setActivatedYear(int activatedYear){ _adapter.setActivatedYear(activatedYear); }
 }
 

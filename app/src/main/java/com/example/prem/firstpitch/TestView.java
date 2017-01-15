@@ -19,22 +19,19 @@ import java.util.HashMap;
  * Created by Prem on 26-Aug-16.
  */
 class TestView extends FrameLayout implements View.OnClickListener {
-    private YearPickerView yearView;
-    private ListView monthList;
-    private int _activatedYear;
-    private int _activatedMonth;
+
+    private YearPickerView _yearView;
+    private ListView _monthList;
     private int _minYear, _maxYear;
-    private MyMonthViewAdapter monthViewAdapter;
-    private TextView month, year, title;
+    private MyMonthViewAdapter _monthViewAdapter;
+    private TextView _month, _year, _title;
     private Context _context;
     private String _headerTitle;
-    private int headerFontColorSelected, headerFontColorNormal;
-    private boolean showMonthOnly, showYearOnly;
-    private int selectedMonth, selectedYear;
+    private int _headerFontColorSelected, _headerFontColorNormal;
+    private boolean _showMonthOnly;
+    private int _selectedMonth, _selectedYear;
     private MonthPickerDialog.OnYearChangedListener _onYearChanged;
     private MonthPickerDialog.OnMonthChangedListener _onMonthChanged;
-    HashMap<String, Integer> map;
-
 
     public TestView(Context context) {
         this(context, null);
@@ -55,8 +52,8 @@ class TestView extends FrameLayout implements View.OnClickListener {
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.monthPickerDialog, defStyleAttr, 0);
 
         int headerBgColor = a.getColor(R.styleable.monthPickerDialog_headerBgColor, 0);
-        headerFontColorNormal = a.getColor(R.styleable.monthPickerDialog_headerFontColorNormal, 0);
-        headerFontColorSelected = a.getColor(R.styleable.monthPickerDialog_headerFontColorSelected, 0);
+        _headerFontColorNormal = a.getColor(R.styleable.monthPickerDialog_headerFontColorNormal, 0);
+        _headerFontColorSelected = a.getColor(R.styleable.monthPickerDialog_headerFontColorSelected, 0);
         int monthBgColor = a.getColor(R.styleable.monthPickerDialog_monthBgColor, 0);
         int monthBgSelectedColor = a.getColor(R.styleable.monthPickerDialog_monthBgSelectedColor, 0);
         int monthFontColorNormal = a.getColor(R.styleable.monthPickerDialog_monthFontColorNormal, 0);
@@ -73,11 +70,11 @@ class TestView extends FrameLayout implements View.OnClickListener {
         if (monthFontColorDisabled == 0) {
             monthFontColorDisabled = getResources().getColor(R.color.fontBlackDisable);
         }
-        if (headerFontColorNormal == 0) {
-            headerFontColorNormal = getResources().getColor(R.color.fontWhiteDisable);
+        if (_headerFontColorNormal == 0) {
+            _headerFontColorNormal = getResources().getColor(R.color.fontWhiteDisable);
         }
-        if (headerFontColorSelected == 0) {
-            headerFontColorSelected = getResources().getColor(R.color.fontWhiteEnable);
+        if (_headerFontColorSelected == 0) {
+            _headerFontColorSelected = getResources().getColor(R.color.fontWhiteEnable);
         }
         if (headerTitleColor == 0) {
             headerTitleColor = getResources().getColor(R.color.fontWhiteEnable);
@@ -111,76 +108,76 @@ class TestView extends FrameLayout implements View.OnClickListener {
         map.put("monthFontColorNormal", monthFontColorNormal);
         map.put("monthFontColorSelected", monthFontColorSelected);
         map.put("monthFontColorDisabled", monthFontColorDisabled);
-        Log.d("----------------", " headerBgColor" + headerBgColor + " headerFontColorNormal" + headerFontColorNormal + " headerFontColorSelected : "
-                + headerFontColorSelected + " headerTitleColor : " + headerTitleColor + " monthBgColor:  " + monthBgColor + " monthBgSelectedColor:  "
+        Log.d("----------------", " headerBgColor" + headerBgColor + " headerFontColorNormal" + _headerFontColorNormal + " headerFontColorSelected : "
+                + _headerFontColorSelected + " headerTitleColor : " + headerTitleColor + " monthBgColor:  " + monthBgColor + " monthBgSelectedColor:  "
                 + monthBgSelectedColor + " monthFontColorDisabled : " + monthFontColorDisabled + " monthFontColorNormal : "
                 + monthFontColorNormal + " monthFontColorSelected: " + monthFontColorSelected);
 
         a.recycle();
 
-        monthList = (ListView) findViewById(R.id.listview);
-        yearView = (YearPickerView) findViewById(R.id.yearView);
-        month = (TextView) findViewById(R.id.month);
-        year = (TextView) findViewById(R.id.year);
-        title = (TextView) findViewById(R.id.title);
+        _monthList = (ListView) findViewById(R.id.listview);
+        _yearView = (YearPickerView) findViewById(R.id.yearView);
+        _month = (TextView) findViewById(R.id.month);
+        _year = (TextView) findViewById(R.id.year);
+        _title = (TextView) findViewById(R.id.title);
         RelativeLayout _pickerBg = (RelativeLayout) findViewById(R.id.picker_view);
         LinearLayout _header = (LinearLayout) findViewById(R.id.header);
 
-        month.setTextColor(headerFontColorSelected);
-        year.setTextColor(headerFontColorNormal);
-        title.setTextColor(headerTitleColor);
+        _month.setTextColor(_headerFontColorSelected);
+        _year.setTextColor(_headerFontColorNormal);
+        _title.setTextColor(headerTitleColor);
         _header.setBackgroundColor(headerBgColor);
         _pickerBg.setBackgroundColor(monthBgColor);
 
-        monthViewAdapter = new MyMonthViewAdapter(context);
-        monthViewAdapter.setColors(map);
-        monthViewAdapter.setOnDaySelectedListener(new MyMonthViewAdapter.OnDaySelectedListener() {
+        _monthViewAdapter = new MyMonthViewAdapter(context);
+        _monthViewAdapter.setColors(map);
+        _monthViewAdapter.setOnDaySelectedListener(new MyMonthViewAdapter.OnDaySelectedListener() {
             @Override
             public void onDaySelected(MyMonthViewAdapter view, int selectedMonth) {
                 Log.d("----------------", "TestView selected month = " + selectedMonth);
-                if (!showMonthOnly) {
-                    TestView.this.selectedMonth = selectedMonth;
-                    monthList.setVisibility(View.GONE);
-                    yearView.setVisibility(View.VISIBLE);
-                    month.setTextColor(headerFontColorNormal);
-                    year.setTextColor(headerFontColorSelected);
+                if (!_showMonthOnly) {
+                    TestView.this._selectedMonth = selectedMonth;
+                    _monthList.setVisibility(View.GONE);
+                    _yearView.setVisibility(View.VISIBLE);
+                    _month.setTextColor(_headerFontColorNormal);
+                    _year.setTextColor(_headerFontColorSelected);
                     if (_onMonthChanged != null) {
                         _onMonthChanged.onMonthChanged(selectedMonth);
                     }
                 }
-                month.setText(_context.getResources().getStringArray(R.array.months)[selectedMonth - 1]);
+                _month.setText(_context.getResources().getStringArray(R.array.months)[selectedMonth - 1]);
             }
         });
-        monthList.setAdapter(monthViewAdapter);
+        _monthList.setAdapter(_monthViewAdapter);
 
-        yearView.setRange(_minYear, _maxYear);
-        yearView.setColors(map);
-        yearView.setYear(Calendar.getInstance().get(Calendar.YEAR));
-        yearView.setOnYearSelectedListener(new YearPickerView.OnYearSelectedListener() {
+        _yearView.setRange(_minYear, _maxYear);
+        _yearView.setColors(map);
+        _yearView.setYear(Calendar.getInstance().get(Calendar.YEAR));
+        _yearView.setOnYearSelectedListener(new YearPickerView.OnYearSelectedListener() {
             @Override
             public void onYearChanged(YearPickerView view, int selectedYear) {
                 Log.d("----------------", "selected year = " + selectedYear);
-                TestView.this.selectedYear = selectedYear;
-                year.setText("" + selectedYear);
-                year.setTextColor(headerFontColorSelected);
-                month.setTextColor(headerFontColorNormal);
+                TestView.this._selectedYear = selectedYear;
+                _year.setText("" + selectedYear);
+                _year.setTextColor(_headerFontColorSelected);
+                _month.setTextColor(_headerFontColorNormal);
                 if (_onYearChanged != null) {
                     _onYearChanged.onYearChanged(selectedYear);
                 }
             }
         });
-        month.setOnClickListener(this);
-        year.setOnClickListener(this);
+        _month.setOnClickListener(this);
+        _year.setOnClickListener(this);
     }
 
-    protected void init(int year, int monthOfYear) {
-        _activatedYear = year;
-        _activatedMonth = monthOfYear;
+    protected void init(int year, int month) {
+        _selectedYear = year;
+        _selectedMonth = month;
     }
 
     protected void setMaxMonth(int maxMonth) {
         if (maxMonth <= Calendar.DECEMBER && maxMonth >= Calendar.JANUARY) {
-            monthViewAdapter.setMaxMonth(maxMonth);
+            _monthViewAdapter.setMaxMonth(maxMonth);
         } else {
             throw new IllegalArgumentException("Month out of range please send months between Calendar.JANUARY, Calendar.DECEMBER");
         }
@@ -189,37 +186,36 @@ class TestView extends FrameLayout implements View.OnClickListener {
 
     protected void setMinMonth(int minMonth) {
         if (minMonth >= Calendar.JANUARY && minMonth <= Calendar.DECEMBER) {
-            monthViewAdapter.setMinMonth(minMonth);
+            _monthViewAdapter.setMinMonth(minMonth);
         } else {
             throw new IllegalArgumentException("Month out of range please send months between Calendar.JANUARY, Calendar.DECEMBER");
         }
     }
 
     protected void setMinYear(int minYear) {
-        yearView.setMinYear(minYear);
+        _yearView.setMinYear(minYear);
     }
 
     protected void setMaxYear(int maxYear) {
-        yearView.setMaxYear(maxYear);
+        _yearView.setMaxYear(maxYear);
     }
 
     protected void showMonthOnly() {
-        showMonthOnly = true;
-        year.setVisibility(GONE);
+        _showMonthOnly = true;
+        _year.setVisibility(GONE);
     }
 
     protected void showYearOnly() {
-        showYearOnly = true;
-        monthList.setVisibility(View.GONE);
-        yearView.setVisibility(VISIBLE);
+        _monthList.setVisibility(View.GONE);
+        _yearView.setVisibility(VISIBLE);
 
-        month.setVisibility(GONE);
-        year.setTextColor(headerFontColorSelected);
+        _month.setVisibility(GONE);
+        _year.setTextColor(_headerFontColorSelected);
     }
 
     protected void setActivatedMonth(int activatedMonth) {
         if (activatedMonth >= Calendar.JANUARY && activatedMonth <= Calendar.DECEMBER) {
-            monthViewAdapter.setActivatedMonth(activatedMonth);
+            _monthViewAdapter.setActivatedMonth(activatedMonth);
         } else {
             throw new IllegalArgumentException("Month out of range please send months between Calendar.JANUARY, Calendar.DECEMBER");
         }
@@ -227,7 +223,7 @@ class TestView extends FrameLayout implements View.OnClickListener {
     }
 
     protected void setActivatedYear(int activatedYear) {
-        yearView.setActivatedYear(activatedYear);
+        _yearView.setActivatedYear(activatedYear);
     }
 
     protected void setMonthRange(int minMonth, int maxMonth) {
@@ -256,18 +252,18 @@ class TestView extends FrameLayout implements View.OnClickListener {
     protected void setTitle(String dialogTitle) {
         if (dialogTitle != null) {
             this._headerTitle = dialogTitle;
-            title.setVisibility(VISIBLE);
+            _title.setVisibility(VISIBLE);
         } else {
-            title.setVisibility(GONE);
+            _title.setVisibility(GONE);
         }
     }
 
     protected int getMonth() {
-        return selectedMonth;
+        return _selectedMonth;
     }
 
     protected int getYear() {
-        return selectedYear;
+        return _selectedYear;
     }
 
     protected void setOnMonthChangedListener(MonthPickerDialog.OnMonthChangedListener onMonthChangedListener) {
@@ -286,19 +282,19 @@ class TestView extends FrameLayout implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.month:
-                if (monthList.getVisibility() == GONE) {
-                    yearView.setVisibility(GONE);
-                    monthList.setVisibility(VISIBLE);
-                    year.setTextColor(headerFontColorNormal);
-                    month.setTextColor(headerFontColorSelected);
+                if (_monthList.getVisibility() == GONE) {
+                    _yearView.setVisibility(GONE);
+                    _monthList.setVisibility(VISIBLE);
+                    _year.setTextColor(_headerFontColorNormal);
+                    _month.setTextColor(_headerFontColorSelected);
                 }
                 break;
             case R.id.year:
-                if (yearView.getVisibility() == GONE) {
-                    monthList.setVisibility(GONE);
-                    yearView.setVisibility(VISIBLE);
-                    year.setTextColor(headerFontColorSelected);
-                    month.setTextColor(headerFontColorNormal);
+                if (_yearView.getVisibility() == GONE) {
+                    _monthList.setVisibility(GONE);
+                    _yearView.setVisibility(VISIBLE);
+                    _year.setTextColor(_headerFontColorSelected);
+                    _month.setTextColor(_headerFontColorNormal);
                 }
         }
     }

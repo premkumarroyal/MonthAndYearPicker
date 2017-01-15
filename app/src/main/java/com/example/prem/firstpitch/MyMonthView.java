@@ -3,7 +3,6 @@ package com.example.prem.firstpitch;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.text.format.Time;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -19,44 +18,38 @@ import java.util.HashMap;
  */
 public class MyMonthView extends ListView {
 
+    // constants
     private static final int DEFAULT_HEIGHT = 100;
     private static final int DEFAULT_NUM_DAYS = 4;
     private static final int DEFAULT_NUM_ROWS = 3;
     private static final int MAX_NUM_ROWS = 3;
     private static final int DAY_SEPARATOR_WIDTH = 1;
+    // days to display
+    private int _numDays = DEFAULT_NUM_DAYS;
+    private int _numCells = _numDays;
+    private int _numRows = DEFAULT_NUM_ROWS;
+    // layout padding
+    private int _padding = 40;
+    private int _width;
+    private int _rowHeight = DEFAULT_HEIGHT;
+    // paints
+    private Paint _monthNumberPaint;
+    private Paint _monthNumberDisabledPaint;
+    private Paint _monthNumberSelectedPaint;
+    // month
+    private String[] _monthNames = getResources().getStringArray(R.array.months);
     private int _monthTextSize;
-    private int mMonthHeaderSize;
-    private int mDaySelectedCircleSize;
-    // affects the padding on the sides of this view
-    private int mPadding = 40;
-    private Paint mDayNumberPaint;
-    private Paint mDayNumberDisabledPaint;
-    private Paint mDayNumberSelectedPaint;
-    private int mMonth;
-    private int mYear;
-    // Quick reference to the width of this view, matches parent
-    private int mWidth;
-    // The height this view should draw at in pixels, set by height param
-    private int mRowHeight = DEFAULT_HEIGHT;
-    // Which day is selected [0-6] or -1 if no day is selected
-    private int mSelectedMonth = -1;
-    // Which day of the week to start on [0-6]
-    // How many days to display
-    private int mNumDays = DEFAULT_NUM_DAYS;
-    private int mNumCells = mNumDays;
-
-    private int mNumRows = DEFAULT_NUM_ROWS;
-    // Optional listener for handling day click actions
+    private int _monthHeaderSize;
+    private int _monthSelectedCircleSize;
+    private int _monthBgSelectedColor;
+    private int _monthFontColorNormal;
+    private int _monthFontColorSelected;
+    private int _monthFontColorDisabled;
+    private int _maxMonth, _minMonth;
+    private int _rowHeightKey;
+    private int _selectedMonth = -1;
+    // listener
     private OnMonthClickListener _onMonthClickListener;
-    // Whether to prevent setting the accessibility delegate
-    private int monthBgColor;
-    private int monthBgSelectedColor;
-    private int monthFontColorNormal;
-    private int monthFontColorSelected;
-    private int monthFontColorDisabled;
-    private int maxMonth, minMonth;
-    private int mRowHeightKey;
-    private String[] monthNames = getResources().getStringArray(R.array.months);
 
     public MyMonthView(Context context) {
         this(context, null);
@@ -73,15 +66,15 @@ public class MyMonthView extends ListView {
 
         _monthTextSize = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP,
                 16, displayMetrics);
-        mMonthHeaderSize = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+        _monthHeaderSize = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                 16, displayMetrics);
-        mDaySelectedCircleSize = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+        _monthSelectedCircleSize = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                 43, displayMetrics);
-        mRowHeightKey = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+        _rowHeightKey = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                 250, displayMetrics);
-        mRowHeight = (mRowHeightKey - mMonthHeaderSize) / MAX_NUM_ROWS;
+        _rowHeight = (_rowHeightKey - _monthHeaderSize) / MAX_NUM_ROWS;
 
-        mPadding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+        _padding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                 16, displayMetrics);
     }
 
@@ -91,29 +84,29 @@ public class MyMonthView extends ListView {
      */
     private void initView() {
 
-        mDayNumberSelectedPaint = new Paint();
-        mDayNumberSelectedPaint.setAntiAlias(true);
-        mDayNumberSelectedPaint.setColor(monthBgSelectedColor);
-        // mDayNumberSelectedPaint.setAlpha(200);
-        mDayNumberSelectedPaint.setTextAlign(Paint.Align.CENTER);
-        mDayNumberSelectedPaint.setStyle(Paint.Style.FILL);
-        mDayNumberSelectedPaint.setFakeBoldText(true);
+        _monthNumberSelectedPaint = new Paint();
+        _monthNumberSelectedPaint.setAntiAlias(true);
+        _monthNumberSelectedPaint.setColor(_monthBgSelectedColor);
+        // _monthNumberSelectedPaint.setAlpha(200);
+        _monthNumberSelectedPaint.setTextAlign(Paint.Align.CENTER);
+        _monthNumberSelectedPaint.setStyle(Paint.Style.FILL);
+        _monthNumberSelectedPaint.setFakeBoldText(true);
 
-        mDayNumberPaint = new Paint();
-        mDayNumberPaint.setAntiAlias(true);
-        mDayNumberPaint.setColor(monthFontColorNormal);
-        mDayNumberPaint.setTextSize(_monthTextSize);
-        mDayNumberPaint.setTextAlign(Paint.Align.CENTER);
-        mDayNumberPaint.setStyle(Paint.Style.FILL);
-        mDayNumberPaint.setFakeBoldText(false);
+        _monthNumberPaint = new Paint();
+        _monthNumberPaint.setAntiAlias(true);
+        _monthNumberPaint.setColor(_monthFontColorNormal);
+        _monthNumberPaint.setTextSize(_monthTextSize);
+        _monthNumberPaint.setTextAlign(Paint.Align.CENTER);
+        _monthNumberPaint.setStyle(Paint.Style.FILL);
+        _monthNumberPaint.setFakeBoldText(false);
 
-        mDayNumberDisabledPaint = new Paint();
-        mDayNumberDisabledPaint.setAntiAlias(true);
-        mDayNumberDisabledPaint.setColor(monthFontColorDisabled);
-        mDayNumberDisabledPaint.setTextSize(_monthTextSize);
-        mDayNumberDisabledPaint.setTextAlign(Paint.Align.CENTER);
-        mDayNumberDisabledPaint.setStyle(Paint.Style.FILL);
-        mDayNumberDisabledPaint.setFakeBoldText(false);
+        _monthNumberDisabledPaint = new Paint();
+        _monthNumberDisabledPaint.setAntiAlias(true);
+        _monthNumberDisabledPaint.setColor(_monthFontColorDisabled);
+        _monthNumberDisabledPaint.setTextSize(_monthTextSize);
+        _monthNumberDisabledPaint.setTextAlign(Paint.Align.CENTER);
+        _monthNumberDisabledPaint.setStyle(Paint.Style.FILL);
+        _monthNumberDisabledPaint.setFakeBoldText(false);
     }
 
     @Override
@@ -125,26 +118,26 @@ public class MyMonthView extends ListView {
      * Draws the month days.
      */
     private void drawDays(Canvas canvas) {
-        int y = (((mRowHeight + _monthTextSize) / 2) - DAY_SEPARATOR_WIDTH) + mMonthHeaderSize;
-        int dayWidthHalf = (mWidth - mPadding * 2) / (mNumDays * 2);
+        int y = (((_rowHeight + _monthTextSize) / 2) - DAY_SEPARATOR_WIDTH) + _monthHeaderSize;
+        int dayWidthHalf = (_width - _padding * 2) / (_numDays * 2);
         int j = 0;
-        for (int month = 0; month < monthNames.length; month++) {
-            //  Log.d("-------loop", " i = "+month+", monthNames[i] = "+ monthNames[month] +" , mSelectedMonth "+mSelectedMonth );
-            int x = (2 * j + 1) * dayWidthHalf + mPadding;
-            if (mSelectedMonth == month) {
-                canvas.drawCircle(x, y - (_monthTextSize / 3), mDaySelectedCircleSize, mDayNumberSelectedPaint);
-                mDayNumberPaint.setColor(monthFontColorSelected);
+        for (int month = 0; month < _monthNames.length; month++) {
+            //  Log.d("-------loop", " i = "+month+", _monthNames[i] = "+ _monthNames[month] +" , _selectedMonth "+_selectedMonth );
+            int x = (2 * j + 1) * dayWidthHalf + _padding;
+            if (_selectedMonth == month) {
+                canvas.drawCircle(x, y - (_monthTextSize / 3), _monthSelectedCircleSize, _monthNumberSelectedPaint);
+                _monthNumberPaint.setColor(_monthFontColorSelected);
             }else{
-                mDayNumberPaint.setColor(monthFontColorNormal);
+                _monthNumberPaint.setColor(_monthFontColorNormal);
             }
 
-            final Paint paint = (month < minMonth || month > maxMonth) ?
-                    mDayNumberDisabledPaint : mDayNumberPaint;
-            canvas.drawText(monthNames[month], x, y, paint);
+            final Paint paint = (month < _minMonth || month > _maxMonth) ?
+                    _monthNumberDisabledPaint : _monthNumberPaint;
+            canvas.drawText(_monthNames[month], x, y, paint);
             j++;
-            if (j == mNumDays) {
+            if (j == _numDays) {
                 j = 0;
-                y += mRowHeight;
+                y += _rowHeight;
             }
         }
     }
@@ -158,16 +151,16 @@ public class MyMonthView extends ListView {
      * @return The day number, or -1 if the position wasn't in a day
      */
     private int getDayFromLocation(float x, float y) {
-        int dayStart = mPadding;
-        if (x < dayStart || x > mWidth - mPadding) {
+        int dayStart = _padding;
+        if (x < dayStart || x > _width - _padding) {
             return -1;
         }
         // Selection is (x - start) / (pixels/day) == (x -s) * day / pixels
-        int row = (int) (y - mMonthHeaderSize) / mRowHeight;
-        int column = (int) ((x - dayStart) * mNumDays / (mWidth - dayStart - mPadding));
+        int row = (int) (y - _monthHeaderSize) / _rowHeight;
+        int column = (int) ((x - dayStart) * _numDays / (_width - dayStart - _padding));
         int day = column + 1;
-        day += row * mNumDays;
-        if (day < 0 || day > mNumCells) {
+        day += row * _numDays;
+        if (day < 0 || day > _numCells) {
             return -1;
         }
         return day;
@@ -187,16 +180,14 @@ public class MyMonthView extends ListView {
 
     protected void setColors(HashMap<String, Integer> colors) {
         Log.d("MonthView -> ", "colors size : " + colors.size());
-        if (colors.containsKey("monthBgColor"))
-            monthBgColor = colors.get("monthBgColor");
         if (colors.containsKey("monthBgSelectedColor"))
-            monthBgSelectedColor = colors.get("monthBgSelectedColor");
+            _monthBgSelectedColor = colors.get("monthBgSelectedColor");
         if (colors.containsKey("monthFontColorNormal"))
-            monthFontColorNormal = colors.get("monthFontColorNormal");
+            _monthFontColorNormal = colors.get("monthFontColorNormal");
         if (colors.containsKey("monthFontColorSelected"))
-            monthFontColorSelected = colors.get("monthFontColorSelected");
+            _monthFontColorSelected = colors.get("monthFontColorSelected");
         if (colors.containsKey("monthFontColorDisabled"))
-            monthFontColorDisabled = colors.get("monthFontColorDisabled");
+            _monthFontColorDisabled = colors.get("monthFontColorDisabled");
         initView();
     }
 
@@ -212,27 +203,27 @@ public class MyMonthView extends ListView {
     }
 
     void setMonthParams(int selectedMonth, int minMonth, int maxMonth) {
-        mSelectedMonth = selectedMonth;
-        this.minMonth = minMonth;
-        this.maxMonth = maxMonth;
-        mNumCells = 12;
+        _selectedMonth = selectedMonth;
+        this._minMonth = minMonth;
+        this._maxMonth = maxMonth;
+        _numCells = 12;
 
     }
 
     public void reuse() {
-        mNumRows = DEFAULT_NUM_ROWS;
+        _numRows = DEFAULT_NUM_ROWS;
     }
 
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        setMeasuredDimension(MeasureSpec.getSize(widthMeasureSpec), mRowHeight * mNumRows
-                + (mMonthHeaderSize * 2));
+        setMeasuredDimension(MeasureSpec.getSize(widthMeasureSpec), _rowHeight * _numRows
+                + (_monthHeaderSize * 2));
     }
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        mWidth = w;
+        _width = w;
     }
 
     @Override
@@ -246,19 +237,5 @@ public class MyMonthView extends ListView {
                 break;
         }
         return true;
-    }
-
-    private static boolean isValidDayOfWeek(int day) {
-        return day >= Calendar.SUNDAY && day <= Calendar.SATURDAY;
-    }
-
-    private static boolean isValidMonth(int month) {
-        return month >= Calendar.JANUARY && month <= Calendar.DECEMBER;
-    }
-
-    private boolean sameDay(int day, Time today) {
-        return mYear == today.year &&
-                mMonth == today.month &&
-                day == today.monthDay;
     }
 }
