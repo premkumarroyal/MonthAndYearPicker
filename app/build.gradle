@@ -1,11 +1,10 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 23
     buildToolsVersion "24.0.1"
 
     defaultConfig {
-        applicationId "com.example.prem.firstpitch"
         minSdkVersion 9
         targetSdkVersion 23
         versionCode 1

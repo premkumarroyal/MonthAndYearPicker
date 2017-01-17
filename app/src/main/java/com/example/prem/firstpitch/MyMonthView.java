@@ -232,9 +232,6 @@ public class MyMonthView extends ListView {
             case MotionEvent.ACTION_UP:
                 int day = getMonthFromLocation(event.getX(), event.getY());
                 if (day >= 0) {
-                    if(day > 1){
-                        day--;
-                    }
                     onDayClick(day);
                 }
                 break;

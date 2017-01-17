@@ -6,6 +6,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -18,7 +19,7 @@ import java.util.HashMap;
 /**
  * Created by Prem on 26-Aug-16.
  */
-class TestView extends FrameLayout implements View.OnClickListener {
+class TestView extends FrameLayout {
 
     private YearPickerView _yearView;
     private ListView _monthList;
@@ -32,6 +33,8 @@ class TestView extends FrameLayout implements View.OnClickListener {
     private int _selectedMonth, _selectedYear;
     private MonthPickerDialog.OnYearChangedListener _onYearChanged;
     private MonthPickerDialog.OnMonthChangedListener _onMonthChanged;
+    private OnDateSet _onDateSet;
+    private OnCancel _onCancel;
 
     public TestView(Context context) {
         this(context, null);
@@ -122,13 +125,30 @@ class TestView extends FrameLayout implements View.OnClickListener {
         _title = (TextView) findViewById(R.id.title);
         RelativeLayout _pickerBg = (RelativeLayout) findViewById(R.id.picker_view);
         LinearLayout _header = (LinearLayout) findViewById(R.id.header);
+        Button ok = (Button) findViewById(R.id.ok_action);
+        Button cancel = (Button) findViewById(R.id.cancel_action);
 
+
+        ok.setTextColor(headerBgColor);
+        cancel.setTextColor(headerBgColor);
         _month.setTextColor(_headerFontColorSelected);
         _year.setTextColor(_headerFontColorNormal);
         _title.setTextColor(headerTitleColor);
         _header.setBackgroundColor(headerBgColor);
         _pickerBg.setBackgroundColor(monthBgColor);
 
+        ok.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                _onDateSet.onDateSet();
+            }
+        });
+        cancel.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                _onCancel.onCancel();
+            }
+        });
         _monthViewAdapter = new MyMonthViewAdapter(context);
         _monthViewAdapter.setColors(map);
         _monthViewAdapter.setOnDaySelectedListener(new MyMonthViewAdapter.OnDaySelectedListener() {
@@ -166,8 +186,29 @@ class TestView extends FrameLayout implements View.OnClickListener {
                 }
             }
         });
-        _month.setOnClickListener(this);
-        _year.setOnClickListener(this);
+        _month.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (_monthList.getVisibility() == GONE) {
+                    _yearView.setVisibility(GONE);
+                    _monthList.setVisibility(VISIBLE);
+                    _year.setTextColor(_headerFontColorNormal);
+                    _month.setTextColor(_headerFontColorSelected);
+                }
+            }
+        });
+        _year.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                if (_yearView.getVisibility() == GONE) {
+                    _monthList.setVisibility(GONE);
+                    _yearView.setVisibility(VISIBLE);
+                    _year.setTextColor(_headerFontColorSelected);
+                    _month.setTextColor(_headerFontColorNormal);
+                }
+            }
+        });
     }
 
     protected void init(int year, int month) {
@@ -278,24 +319,19 @@ class TestView extends FrameLayout implements View.OnClickListener {
         }
     }
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.month:
-                if (_monthList.getVisibility() == GONE) {
-                    _yearView.setVisibility(GONE);
-                    _monthList.setVisibility(VISIBLE);
-                    _year.setTextColor(_headerFontColorNormal);
-                    _month.setTextColor(_headerFontColorSelected);
-                }
-                break;
-            case R.id.year:
-                if (_yearView.getVisibility() == GONE) {
-                    _monthList.setVisibility(GONE);
-                    _yearView.setVisibility(VISIBLE);
-                    _year.setTextColor(_headerFontColorSelected);
-                    _month.setTextColor(_headerFontColorNormal);
-                }
-        }
+    public void setOnDateListener(OnDateSet onDateSet) {
+        this._onDateSet = onDateSet;
+    }
+
+    public void setOnCancelListener(OnCancel onCancel) {
+        this._onCancel = onCancel;
+    }
+
+
+    public interface OnDateSet{
+        void onDateSet();
+    }
+    public interface OnCancel{
+        void onCancel();
     }
 }

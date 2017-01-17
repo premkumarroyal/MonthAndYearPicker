@@ -181,7 +181,7 @@ public class MainActivity extends AppCompatActivity {
 
                 MonthPickerDialog.Builder builder = new MonthPickerDialog.Builder(MainActivity.this, new MonthPickerDialog.OnDateSetListener() {
                     @Override
-                    public void onDateSet(TestView view, int selectedMonth, int selectedYear) {
+                    public void onDateSet(int selectedMonth, int selectedYear) {
                         Log.d("MAIN ACTIVITY", "selectedMonth : " + selectedMonth + " selectedYear : " + selectedYear);
                         Toast.makeText(MainActivity.this, "Date setted with month" + selectedMonth + " year " + selectedYear, Toast.LENGTH_SHORT).show();
                     }

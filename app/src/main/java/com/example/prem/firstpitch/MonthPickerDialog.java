@@ -45,18 +45,31 @@ public class MonthPickerDialog extends AlertDialog implements OnClickListener, O
                               int monthOfYear) {
         super(context, theme);
         _callBack = callBack;
-        setButton(BUTTON_POSITIVE, "OK", this);
+       /* setButton(BUTTON_POSITIVE, "OK", this);
         setButton(BUTTON_NEGATIVE, "CANCEL", new OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.dismiss();
             }
-        });
+        });*/
         //setIcon(0);
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.month_picker_dialog, null);
         setView(view);
         _monthPicker = (TestView) view.findViewById(R.id.monthPicker);
+        _monthPicker.setOnDateListener(new TestView.OnDateSet() {
+            @Override
+            public void onDateSet() {
+                tryNotifyDateSet();
+                MonthPickerDialog.this.dismiss();
+            }
+        });
+        _monthPicker.setOnCancelListener(new TestView.OnCancel() {
+            @Override
+            public void onCancel() {
+                MonthPickerDialog.this.dismiss();
+            }
+        });
         _monthPicker.init(year, monthOfYear);
     }
 
@@ -80,10 +93,10 @@ public class MonthPickerDialog extends AlertDialog implements OnClickListener, O
     }
 
 
-    private void tryNotifyDateSet() {
+    void tryNotifyDateSet() {
         if (_callBack != null) {
             _monthPicker.clearFocus();
-            _callBack.onDateSet(_monthPicker, _monthPicker.getMonth(), _monthPicker.getYear());
+            _callBack.onDateSet( _monthPicker.getMonth(), _monthPicker.getYear());
         }
     }
 
@@ -405,12 +418,11 @@ public class MonthPickerDialog extends AlertDialog implements OnClickListener, O
      */
     public interface OnDateSetListener {
         /**
-         * @param view          The view associated with this listener.
          * @param selectedMonth  The month that was set (0-11) for compatibility with {@link Calendar}.
          * @param selectedYear The year that was set.
          *
          */
-        void onDateSet(TestView view, int selectedMonth, int selectedYear);
+        void onDateSet(int selectedMonth, int selectedYear);
     }
 
     /**
