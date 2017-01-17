@@ -10,13 +10,12 @@ import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.widget.ListView;
 
-import java.util.Calendar;
 import java.util.HashMap;
 
 /**
  * Created by Prem on 15-Aug-16.
  */
-public class MyMonthView extends ListView {
+public class MonthView extends ListView {
 
     // constants
     private static final int DEFAULT_HEIGHT = 100;
@@ -51,15 +50,15 @@ public class MyMonthView extends ListView {
     // listener
     private OnMonthClickListener _onMonthClickListener;
 
-    public MyMonthView(Context context) {
+    public MonthView(Context context) {
         this(context, null);
     }
 
-    public MyMonthView(Context context, AttributeSet attrs) {
+    public MonthView(Context context, AttributeSet attrs) {
         this(context, attrs, R.style.TestView);
     }
 
-    public MyMonthView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public MonthView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
         DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
@@ -195,7 +194,7 @@ public class MyMonthView extends ListView {
      * Handles callbacks when the user clicks on a time object.
      */
     public interface OnMonthClickListener {
-        void onMonthClick(MyMonthView view, int month);
+        void onMonthClick(MonthView view, int month);
     }
 
     public void setOnMonthClickListener(OnMonthClickListener listener) {

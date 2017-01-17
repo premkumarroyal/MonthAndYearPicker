@@ -19,12 +19,12 @@ import java.util.HashMap;
 /**
  * Created by Prem on 26-Aug-16.
  */
-class TestView extends FrameLayout {
+class MonthPickerView extends FrameLayout {
 
     private YearPickerView _yearView;
     private ListView _monthList;
     private int _minYear, _maxYear;
-    private MyMonthViewAdapter _monthViewAdapter;
+    private MonthViewAdapter _monthViewAdapter;
     private TextView _month, _year, _title;
     private Context _context;
     private String _headerTitle;
@@ -36,17 +36,17 @@ class TestView extends FrameLayout {
     private OnDateSet _onDateSet;
     private OnCancel _onCancel;
 
-    public TestView(Context context) {
+    public MonthPickerView(Context context) {
         this(context, null);
         _context = context;
     }
 
-    public TestView(Context context, AttributeSet attrs) {
+    public MonthPickerView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
         _context = context;
     }
 
-    public TestView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public MonthPickerView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         _context = context;
         LayoutInflater mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -149,13 +149,13 @@ class TestView extends FrameLayout {
                 _onCancel.onCancel();
             }
         });
-        _monthViewAdapter = new MyMonthViewAdapter(context);
+        _monthViewAdapter = new MonthViewAdapter(context);
         _monthViewAdapter.setColors(map);
-        _monthViewAdapter.setOnDaySelectedListener(new MyMonthViewAdapter.OnDaySelectedListener() {
+        _monthViewAdapter.setOnDaySelectedListener(new MonthViewAdapter.OnDaySelectedListener() {
             @Override
-            public void onDaySelected(MyMonthViewAdapter view, int selectedMonth) {
+            public void onDaySelected(MonthViewAdapter view, int selectedMonth) {
                 Log.d("----------------", "TestView selected month = " + selectedMonth);
-                TestView.this._selectedMonth = selectedMonth;
+                MonthPickerView.this._selectedMonth = selectedMonth;
                 _month.setText(_context.getResources().getStringArray(R.array.months)[selectedMonth - 1]);
                 if (!_showMonthOnly) {
                     _monthList.setVisibility(View.GONE);
@@ -177,7 +177,7 @@ class TestView extends FrameLayout {
             @Override
             public void onYearChanged(YearPickerView view, int selectedYear) {
                 Log.d("----------------", "selected year = " + selectedYear);
-                TestView.this._selectedYear = selectedYear;
+                MonthPickerView.this._selectedYear = selectedYear;
                 _year.setText("" + selectedYear);
                 _year.setTextColor(_headerFontColorSelected);
                 _month.setTextColor(_headerFontColorNormal);

@@ -37,10 +37,10 @@ public class MainActivity extends AppCompatActivity {
 
         yearView = (YearPickerView) findViewById(R.id.yearView);
 
-       /* MyMonthViewAdapter monthViewAdapter = new MyMonthViewAdapter(this, null);
-        monthViewAdapter.setOnDaySelectedListener(new MyMonthViewAdapter.OnMonthClickListener() {
+       /* MonthViewAdapter monthViewAdapter = new MonthViewAdapter(this, null);
+        monthViewAdapter.setOnDaySelectedListener(new MonthViewAdapter.OnMonthClickListener() {
             @Override
-            public void onDaySelected(MyMonthViewAdapter view, int day) {
+            public void onDaySelected(MonthViewAdapter view, int day) {
                 Log.d("----------------", "selected month = " + day);
                 monthList.setVisibility(View.GONE);
                 yearView.setVisibility(View.VISIBLE);

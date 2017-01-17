@@ -14,7 +14,7 @@ import java.util.Calendar;
 
 
 public class MonthPickerDialog extends AlertDialog implements OnClickListener, OnDateChangedListener {
-    private final TestView _monthPicker;
+    private final MonthPickerView _monthPicker;
     private final OnDateSetListener _callBack;
 
 
@@ -56,15 +56,15 @@ public class MonthPickerDialog extends AlertDialog implements OnClickListener, O
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.month_picker_dialog, null);
         setView(view);
-        _monthPicker = (TestView) view.findViewById(R.id.monthPicker);
-        _monthPicker.setOnDateListener(new TestView.OnDateSet() {
+        _monthPicker = (MonthPickerView) view.findViewById(R.id.monthPicker);
+        _monthPicker.setOnDateListener(new MonthPickerView.OnDateSet() {
             @Override
             public void onDateSet() {
                 tryNotifyDateSet();
                 MonthPickerDialog.this.dismiss();
             }
         });
-        _monthPicker.setOnCancelListener(new TestView.OnCancel() {
+        _monthPicker.setOnCancelListener(new MonthPickerView.OnCancel() {
             @Override
             public void onCancel() {
                 MonthPickerDialog.this.dismiss();
@@ -88,7 +88,7 @@ public class MonthPickerDialog extends AlertDialog implements OnClickListener, O
      *
      * @return The calendar view.
      */
-    public TestView getDatePicker() {
+    public MonthPickerView getDatePicker() {
         return _monthPicker;
     }
 

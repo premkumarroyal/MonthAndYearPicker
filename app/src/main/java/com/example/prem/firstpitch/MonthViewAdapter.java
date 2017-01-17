@@ -14,14 +14,14 @@ import java.util.HashMap;
 /**
  * Created by Prem on 15-Aug-16.
  */
-public class MyMonthViewAdapter extends BaseAdapter {
+public class MonthViewAdapter extends BaseAdapter {
 
     private int _minMonth, _maxMonth, _activatedMonth;
     private Context _context;
     private HashMap<String, Integer> _colors;
     private OnDaySelectedListener mOnDaySelectedListener;
 
-    public MyMonthViewAdapter(Context context) {
+    public MonthViewAdapter(Context context) {
         this._context = context;
         setRange();
     }
@@ -44,11 +44,11 @@ public class MyMonthViewAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup viewGroup) {
-        final MyMonthView v;
+        final MonthView v;
         if (convertView != null) {
-            v = (MyMonthView) convertView;
+            v = (MonthView) convertView;
         } else {
-            v = new MyMonthView(_context);
+            v = new MonthView(_context);
             Log.d("TESTVIEW-SetAdapter", "map is here -> " + _colors.size());
             v.setColors(_colors);
 
@@ -70,15 +70,15 @@ public class MyMonthViewAdapter extends BaseAdapter {
         return v;
     }
 
-    private final MyMonthView.OnMonthClickListener mOnDayClickListener = new MyMonthView.OnMonthClickListener() {
+    private final MonthView.OnMonthClickListener mOnDayClickListener = new MonthView.OnMonthClickListener() {
         @Override
-        public void onMonthClick(MyMonthView view, int day) {
-            Log.d("MyMonthViewAdapter", "onDayClick " + day);
+        public void onMonthClick(MonthView view, int day) {
+            Log.d("MonthViewAdapter", "onDayClick " + day);
             if (isCalendarInRange(day)) {
-                Log.d("MyMonthViewAdapter", "day not null && Calender in range " + day);
+                Log.d("MonthViewAdapter", "day not null && Calender in range " + day);
                 setSelectedDay(day);
                 if (mOnDaySelectedListener != null) {
-                    mOnDaySelectedListener.onDaySelected(MyMonthViewAdapter.this, day);
+                    mOnDaySelectedListener.onDaySelected(MonthViewAdapter.this, day);
                 }
             }
         }
@@ -94,7 +94,7 @@ public class MyMonthViewAdapter extends BaseAdapter {
      * @param day The day to highlight
      */
     public void setSelectedDay(int day) {
-        Log.d("MyMonthViewAdapter", "setSelectedDay : " + day);
+        Log.d("MonthViewAdapter", "setSelectedDay : " + day);
         _activatedMonth = day - 1;
         notifyDataSetChanged();
     }
@@ -118,7 +118,7 @@ public class MyMonthViewAdapter extends BaseAdapter {
     }
 
     public interface OnDaySelectedListener {
-        void onDaySelected(MyMonthViewAdapter view, int day);
+        void onDaySelected(MonthViewAdapter view, int day);
     }
 
     void setMaxMonth(int maxMonth) {
