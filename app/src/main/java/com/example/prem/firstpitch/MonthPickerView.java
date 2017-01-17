@@ -16,9 +16,6 @@ import android.widget.TextView;
 import java.util.Calendar;
 import java.util.HashMap;
 
-/**
- * Created by Prem on 26-Aug-16.
- */
 class MonthPickerView extends FrameLayout {
 
     private YearPickerView _yearView;

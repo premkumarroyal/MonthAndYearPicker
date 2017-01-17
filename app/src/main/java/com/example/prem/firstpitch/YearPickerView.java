@@ -16,9 +16,6 @@ import java.util.Calendar;
 import java.util.HashMap;
 
 
-/**
- * Displays a selectable list of years.
- */
 public class YearPickerView extends ListView {
 
     private Context _context;

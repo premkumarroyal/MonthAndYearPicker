@@ -11,9 +11,7 @@ import android.widget.BaseAdapter;
 import java.util.Calendar;
 import java.util.HashMap;
 
-/**
- * Created by Prem on 15-Aug-16.
- */
+
 public class MonthViewAdapter extends BaseAdapter {
 
     private int _minMonth, _maxMonth, _activatedMonth;

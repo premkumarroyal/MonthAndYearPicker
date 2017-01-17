@@ -12,9 +12,6 @@ import android.widget.ListView;
 
 import java.util.HashMap;
 
-/**
- * Created by Prem on 15-Aug-16.
- */
 public class MonthView extends ListView {
 
     // constants
