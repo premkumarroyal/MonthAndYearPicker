@@ -60,10 +60,12 @@ public class MonthPickerDialog extends AlertDialog implements OnClickListener, O
         _monthPicker.init(year, monthOfYear);
     }
 
+    @Override
     public void onClick(DialogInterface dialog, int which) {
         tryNotifyDateSet();
     }
 
+    @Override
     public void onDateChanged(DatePicker view, int year, int month, int day) {
         _monthPicker.init(year, month);
     }

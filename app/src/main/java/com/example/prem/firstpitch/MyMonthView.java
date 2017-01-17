@@ -150,7 +150,7 @@ public class MyMonthView extends ListView {
      * @param x The x position of the touch event
      * @return The day number, or -1 if the position wasn't in a day
      */
-    private int getDayFromLocation(float x, float y) {
+    private int getMonthFromLocation(float x, float y) {
         int dayStart = _padding;
         if (x < dayStart || x > _width - _padding) {
             return -1;
@@ -230,8 +230,11 @@ public class MyMonthView extends ListView {
     public boolean onTouchEvent(MotionEvent event) {
         switch (event.getAction()) {
             case MotionEvent.ACTION_UP:
-                final int day = getDayFromLocation(event.getX(), event.getY());
+                int day = getMonthFromLocation(event.getX(), event.getY());
                 if (day >= 0) {
+                    if(day > 1){
+                        day--;
+                    }
                     onDayClick(day);
                 }
                 break;

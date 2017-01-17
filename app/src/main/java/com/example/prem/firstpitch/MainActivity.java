@@ -133,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
         yearView.setOnYearSelectedListener(new YearPickerView.OnYearSelectedListener() {
             @Override
             public void onYearChanged(YearPickerView view, int year) {
-                Log.d("----------------", "selected month = " + year);
+                Log.d("----------------", "selected year = " + year);
                 yearView.setVisibility(View.GONE);
                 monthList.setVisibility(View.VISIBLE);
             }
@@ -193,7 +193,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onMonthChanged(int selectedMonth) {
                         Log.d(TAG, "Selected month : " + selectedMonth);
-                        Toast.makeText(MainActivity.this, " Selected month : " + selectedMonth, Toast.LENGTH_LONG).show();
+                        Toast.makeText(MainActivity.this, " Selected month : " + selectedMonth, Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -201,7 +201,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onYearChanged(int selectedYear) {
                         Log.d(TAG, "Selected year : " + selectedYear);
-                        Toast.makeText(MainActivity.this, " Selected month : " + selectedYear, Toast.LENGTH_LONG).show();
+                        Toast.makeText(MainActivity.this, " Selected year : " + selectedYear, Toast.LENGTH_SHORT).show();
                     }
                 });
 

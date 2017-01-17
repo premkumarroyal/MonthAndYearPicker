@@ -135,17 +135,17 @@ class TestView extends FrameLayout implements View.OnClickListener {
             @Override
             public void onDaySelected(MyMonthViewAdapter view, int selectedMonth) {
                 Log.d("----------------", "TestView selected month = " + selectedMonth);
+                TestView.this._selectedMonth = selectedMonth;
+                _month.setText(_context.getResources().getStringArray(R.array.months)[selectedMonth - 1]);
                 if (!_showMonthOnly) {
-                    TestView.this._selectedMonth = selectedMonth;
                     _monthList.setVisibility(View.GONE);
                     _yearView.setVisibility(View.VISIBLE);
                     _month.setTextColor(_headerFontColorNormal);
                     _year.setTextColor(_headerFontColorSelected);
-                    if (_onMonthChanged != null) {
-                        _onMonthChanged.onMonthChanged(selectedMonth);
-                    }
                 }
-                _month.setText(_context.getResources().getStringArray(R.array.months)[selectedMonth - 1]);
+                if (_onMonthChanged != null) {
+                    _onMonthChanged.onMonthChanged(selectedMonth);
+                }
             }
         });
         _monthList.setAdapter(_monthViewAdapter);
