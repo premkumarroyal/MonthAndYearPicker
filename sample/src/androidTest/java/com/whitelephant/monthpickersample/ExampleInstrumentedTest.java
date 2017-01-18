@@ -1,4 +1,4 @@
-package com.urbanpiper.sample;
+package com.whitelephant.monthpickersample;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

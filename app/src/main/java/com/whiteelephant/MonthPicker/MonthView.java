@@ -1,4 +1,4 @@
-package com.example.prem.firstpitch;
+package com.whiteelephant.MonthPicker;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -9,6 +9,8 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.widget.ListView;
+
+import com.example.prem.firstpitch.R;
 
 import java.util.HashMap;
 

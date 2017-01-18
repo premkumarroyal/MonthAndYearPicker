@@ -1,4 +1,4 @@
-package com.example.prem.firstpitch;
+package com.whiteelephant.MonthPicker;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -12,6 +12,8 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.example.prem.firstpitch.*;
 
 import java.util.Calendar;
 import java.util.HashMap;
@@ -183,7 +185,7 @@ class MonthPickerView extends FrameLayout {
                 }
             }
         });
-        _month.setOnClickListener(new View.OnClickListener() {
+        _month.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (_monthList.getVisibility() == GONE) {
@@ -194,7 +196,7 @@ class MonthPickerView extends FrameLayout {
                 }
             }
         });
-        _year.setOnClickListener(new View.OnClickListener(){
+        _year.setOnClickListener(new OnClickListener(){
 
             @Override
             public void onClick(View view) {

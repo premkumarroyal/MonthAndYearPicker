@@ -1,4 +1,4 @@
-package com.example.prem.firstpitch;
+package com.whiteelephant.MonthPicker;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.DatePicker.OnDateChangedListener;
+
+import com.example.prem.firstpitch.R;
 
 import java.util.Calendar;
 

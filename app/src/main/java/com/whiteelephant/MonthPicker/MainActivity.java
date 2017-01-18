@@ -1,10 +1,7 @@
-package com.example.prem.firstpitch;
+package com.whiteelephant.MonthPicker;
 
 import android.annotation.TargetApi;
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +11,8 @@ import android.widget.DatePicker;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.prem.firstpitch.*;
 
 import java.util.Calendar;
 import java.util.Date;

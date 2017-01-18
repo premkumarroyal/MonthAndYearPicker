@@ -1,4 +1,4 @@
-package com.example.prem.firstpitch;
+package com.whiteelephant.monthpicker;
 
 import org.junit.Test;
 

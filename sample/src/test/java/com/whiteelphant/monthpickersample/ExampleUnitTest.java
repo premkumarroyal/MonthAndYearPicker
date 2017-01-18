@@ -1,4 +1,4 @@
-package com.urbanpiper.sample;
+package com.whiteelphant.monthpickersample;
 
 import org.junit.Test;
 

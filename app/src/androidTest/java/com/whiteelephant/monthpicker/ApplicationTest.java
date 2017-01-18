@@ -1,4 +1,4 @@
-package com.example.prem.firstpitch;
+package com.whiteelephant.monthpicker;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
