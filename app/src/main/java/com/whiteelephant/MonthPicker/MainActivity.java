@@ -1,4 +1,4 @@
-package com.whiteelephant.MonthPicker;
+package com.whiteelephant.monthpicker;
 
 import android.annotation.TargetApi;
 import android.app.DatePickerDialog;
@@ -12,7 +12,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.prem.firstpitch.*;
+import com.example.prem.firstpitch.R;
 
 import java.util.Calendar;
 import java.util.Date;

@@ -1,4 +1,4 @@
-package com.whiteelephant.MonthPicker;
+package com.whiteelephant.monthpicker;
 
 import android.content.Context;
 import android.content.res.Resources;

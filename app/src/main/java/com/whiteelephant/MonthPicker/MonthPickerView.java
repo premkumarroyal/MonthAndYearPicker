@@ -1,4 +1,4 @@
-package com.whiteelephant.MonthPicker;
+package com.whiteelephant.monthpicker;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -13,7 +13,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.prem.firstpitch.*;
+import com.example.prem.firstpitch.R;
 
 import java.util.Calendar;
 import java.util.HashMap;

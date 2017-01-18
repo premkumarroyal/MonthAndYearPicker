@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import com.urbanpiper.sample.R;
 import com.whiteelephant.monthpicker.MonthPickerDialog;
 
 import java.util.Calendar;
@@ -36,11 +35,11 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.month_picker).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MonthPickerDialog.Builder builder = new MonthPickerDialog.Builder(com.urbanpiper.sample.MainActivity.this, new MonthPickerDialog.OnDateSetListener() {
+                MonthPickerDialog.Builder builder = new MonthPickerDialog.Builder(MainActivity.this, new MonthPickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(int selectedMonth, int selectedYear) {
                         Log.d(TAG, "selectedMonth : " + selectedMonth + " selectedYear : " + selectedYear);
-                        Toast.makeText(com.urbanpiper.sample.MainActivity.this, "Date setted with month" + selectedMonth + " year " + selectedYear, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "Date setted with month" + selectedMonth + " year " + selectedYear, Toast.LENGTH_SHORT).show();
                     }
                 }, 2017, Calendar.JANUARY);
 
@@ -50,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onMonthChanged(int selectedMonth) {
                         Log.d(TAG, "Selected month : " + selectedMonth);
-                        Toast.makeText(com.urbanpiper.sample.MainActivity.this, " Selected month : " + selectedMonth, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, " Selected month : " + selectedMonth, Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -58,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onYearChanged(int selectedYear) {
                         Log.d(TAG, "Selected year : " + selectedYear);
-                        Toast.makeText(com.urbanpiper.sample.MainActivity.this, " Selected year : " + selectedYear, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, " Selected year : " + selectedYear, Toast.LENGTH_SHORT).show();
                     }
                 });
 

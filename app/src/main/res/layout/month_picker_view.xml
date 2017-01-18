@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <com.example.prem.firstpitch.YearPickerView
+        <com.whiteelephant.monthpicker.YearPickerView
             android:id="@+id/yearView"
             android:layout_width="match_parent"
             android:layout_height="265dp"

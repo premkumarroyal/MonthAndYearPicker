@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:monthPickerDialog="http://schemas.android.com/apk/res-auto"
     android:background="#000"
-    tools:context="com.example.prem.firstpitch.MainActivity">
+    tools:context="com.whiteelephant.monthpicker.MainActivity">
 
     <ListView
         android:id="@+id/listview"
@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         />-->
 
-    <com.example.prem.firstpitch.YearPickerView
+    <com.whiteelephant.monthpicker.YearPickerView
         android:id="@+id/yearView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -62,7 +62,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>-->
 
-    <com.example.prem.firstpitch.TestView
+    <com.whiteelephant.monthpicker.MonthPickerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         style="@style/TestView"
