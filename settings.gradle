@@ -1,2 +1,2 @@
-include ':app', ':sample'
+include ':monthandyearpicker', ':sample'
 include ':app', ':app'
