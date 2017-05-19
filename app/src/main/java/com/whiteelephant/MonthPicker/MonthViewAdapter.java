@@ -14,7 +14,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 
 
-public class MonthViewAdapter extends BaseAdapter {
+class MonthViewAdapter extends BaseAdapter {
 
     private int _minMonth, _maxMonth, _activatedMonth;
     private Context _context;
@@ -49,7 +49,7 @@ public class MonthViewAdapter extends BaseAdapter {
             v = (MonthView) convertView;
         } else {
             v = new MonthView(_context);
-            Log.d("TESTVIEW-SetAdapter", "map is here -> " + _colors.size());
+            Log.d("MonthPickerAdapter", "SetAdapter map is here -> " + _colors.size());
             v.setColors(_colors);
 
             // Set up the new view
@@ -148,6 +148,6 @@ public class MonthViewAdapter extends BaseAdapter {
 
     void setColors(HashMap map) {
         _colors = map;
-        Log.d("TESTVIEW", "map is here -> " + map.size());
+        Log.d("MonthPickerDialogStyle", "map is here -> " + map.size());
     }
 }

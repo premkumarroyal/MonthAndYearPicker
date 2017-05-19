@@ -4,5 +4,6 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:gravity="center"
+    android:background="@null"
     android:minHeight="50dp" />
 

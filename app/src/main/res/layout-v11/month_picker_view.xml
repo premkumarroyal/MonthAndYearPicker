@@ -24,27 +24,36 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/action_btn_lay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp">
+        android:paddingBottom="10dp">
 
-        <Button
+
+        <TextView
             android:id="@+id/ok_action"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:background="?android:selectableItemBackground"
             android:text="OK"
-            android:textColor="@color/colorAccent" />
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:paddingRight="32dp"
+            android:paddingLeft="20dp"
+            android:foreground="?android:attr/selectableItemBackground"/>
 
-        <Button
+        <TextView
             android:id="@+id/cancel_action"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@+id/ok_action"
-            android:background="?android:selectableItemBackground"
             android:text="CANCEL"
-            android:textColor="@color/colorAccent" />
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:paddingRight="20dp"
+            android:paddingLeft="20dp"
+            android:foreground="?android:attr/selectableItemBackground"/>
     </RelativeLayout>
+
 
 </LinearLayout>

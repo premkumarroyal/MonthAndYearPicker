@@ -14,7 +14,8 @@
         android:text="Trading month"
         android:gravity="center"
         android:paddingTop="10dp"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:textColor="@android:color/primary_text_dark_nodisable"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -29,7 +30,8 @@
             android:paddingLeft="30dp"
             android:paddingRight="10dp"
             android:text="JUN"
-            android:textSize="35sp" />
+            android:textSize="35sp"
+            android:textColor="@android:color/primary_text_dark_nodisable"/>
 
         <TextView
             android:id="@+id/year"
@@ -39,6 +41,7 @@
             android:paddingLeft="10dp"
             android:paddingRight="30dp"
             android:text="2016"
-            android:textSize="35sp" />
+            android:textSize="35sp"
+            android:textColor="@android:color/primary_text_dark_nodisable"/>
     </LinearLayout>
 </LinearLayout>

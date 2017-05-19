@@ -3,6 +3,7 @@ package com.whiteelephant.monthpicker;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
+import android.support.annotation.IntRange;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -47,15 +48,8 @@ public class MonthPickerDialog extends AlertDialog implements OnClickListener, O
                               int monthOfYear) {
         super(context, theme);
         _callBack = callBack;
-       /* setButton(BUTTON_POSITIVE, "OK", this);
-        setButton(BUTTON_NEGATIVE, "CANCEL", new OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-            }
-        });*/
-        //setIcon(0);
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater = (LayoutInflater) context
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.month_picker_dialog, null);
         setView(view);
         _monthPicker = (MonthPickerView) view.findViewById(R.id.monthPicker);
@@ -98,7 +92,7 @@ public class MonthPickerDialog extends AlertDialog implements OnClickListener, O
     void tryNotifyDateSet() {
         if (_callBack != null) {
             _monthPicker.clearFocus();
-            _callBack.onDateSet( _monthPicker.getMonth(), _monthPicker.getYear());
+            _callBack.onDateSet(_monthPicker.getMonth(), _monthPicker.getYear());
         }
     }
 
@@ -163,7 +157,7 @@ public class MonthPickerDialog extends AlertDialog implements OnClickListener, O
         private Context _context;
         private OnDateSetListener _callBack;
         private int _activatedMonth, _activatedYear;
-        private int _minMonth, _maxMonth;
+        private int _minMonth = Calendar.JANUARY, _maxMonth = Calendar.DECEMBER;
         private int _minYear, _maxYear;
         private boolean monthOnly, yearOnly;
         private String title = null;
@@ -180,23 +174,45 @@ public class MonthPickerDialog extends AlertDialog implements OnClickListener, O
          *                 when the user sets the date
          * @param year     the initially selected year
          * @param month    the initially selected month (0-11 for compatibility with
-         * {@link Calendar}Calender.MONTH or Calendar.JANUARY, Calendar.FEBRUARY etc)
+         *                 {@link Calendar}Calender.MONTH or Calendar.JANUARY, Calendar.FEBRUARY etc)
          */
 
         public Builder(Context context,
                        OnDateSetListener callBack,
                        int year,
-                       int month) {
+                       @IntRange(from = Calendar.JANUARY, to = Calendar.DECEMBER) int month) {
+
+            if (month >= Calendar.JANUARY && month <= Calendar.DECEMBER) {
+                this._activatedMonth = month;
+            } else {
+                throw new IllegalArgumentException("Month range should be between 0 " +
+                        "(Calender.JANUARY) to 11 (Calendar.DECEMBER)");
+            }
+
+
+            if (year >= 1) {
+                this._activatedYear = year;
+            } else {
+                throw new IllegalArgumentException("Selected year should be > 1");
+            }
+
             this._context = context;
             this._callBack = callBack;
-            this._activatedMonth = month;
-            this._activatedYear = year;
 
-            Calendar calendar = Calendar.getInstance();
-            _minMonth = Calendar.JANUARY;
-            _maxMonth = Calendar.DECEMBER;
-            _minYear = 1900;
-            _maxYear = calendar.get(Calendar.YEAR);
+            if (year > MonthPickerView._minYear) {
+                _minYear = MonthPickerView._minYear;
+            } else {
+                _minYear = year;
+                MonthPickerView._minYear = year;
+            }
+
+            if (year > MonthPickerView._maxYear) {
+                _maxYear = year;
+                MonthPickerView._maxYear = year;
+            } else {
+                _maxYear = MonthPickerView._maxYear;
+            }
+
 
         }
 
@@ -207,9 +223,15 @@ public class MonthPickerDialog extends AlertDialog implements OnClickListener, O
          * @param minMonth
          * @return Builder
          */
-        public Builder setMinMonth(int minMonth) {
-            this._minMonth = minMonth;
-            return this;
+        public Builder setMinMonth(@IntRange(from = Calendar.JANUARY, to = Calendar.DECEMBER)
+                                           int minMonth) {
+            if (minMonth >= Calendar.JANUARY && minMonth <= Calendar.DECEMBER) {
+                this._minMonth = minMonth;
+                return this;
+            } else {
+                throw new IllegalArgumentException("Month range should be between 0 " +
+                        "(Calender.JANUARY) to 11 (Calendar.DECEMBER)");
+            }
         }
 
         /**
@@ -219,9 +241,15 @@ public class MonthPickerDialog extends AlertDialog implements OnClickListener, O
          * @param maxMonth
          * @return
          */
-        public Builder setMaxMonth(int maxMonth) {
-            this._maxMonth = maxMonth;
-            return this;
+        public Builder setMaxMonth(@IntRange(from = Calendar.JANUARY, to = Calendar.DECEMBER)
+                                           int maxMonth) {
+           /* if (maxMonth >= Calendar.JANUARY && maxMonth <= Calendar.DECEMBER) {*/
+                this._maxMonth = maxMonth;
+                return this;
+            /*} else {
+                throw new IllegalArgumentException("Month range should be between 0 " +
+                        "(Calender.JANUARY) to 11 (Calendar.DECEMBER)");
+            }*/
         }
 
 
@@ -254,7 +282,8 @@ public class MonthPickerDialog extends AlertDialog implements OnClickListener, O
          * @param activatedMonth
          * @return Builder
          */
-        public Builder setActivatedMonth(int activatedMonth) {
+        public Builder setActivatedMonth(@IntRange(from = Calendar.JANUARY, to = Calendar.DECEMBER)
+                                                 int activatedMonth) {
             this._activatedMonth = activatedMonth;
             return this;
         }
@@ -280,10 +309,19 @@ public class MonthPickerDialog extends AlertDialog implements OnClickListener, O
          * @param maxMonth maximum enabled month.
          * @return Builder
          */
-        public Builder setMonthRange(int minMonth, int maxMonth) {
-            this._minMonth = minMonth;
-            this._maxMonth = maxMonth;
-            return this;
+        public Builder setMonthRange( @IntRange(from = Calendar.JANUARY, to = Calendar.DECEMBER)
+                                              int minMonth,
+                                      @IntRange(from = Calendar.JANUARY, to = Calendar.DECEMBER)
+                                              int maxMonth) {
+            if (minMonth >= Calendar.JANUARY && minMonth <= Calendar.DECEMBER &&
+                    maxMonth >= Calendar.JANUARY && maxMonth <= Calendar.DECEMBER) {
+                this._minMonth = minMonth;
+                this._maxMonth = maxMonth;
+                return this;
+            } else {
+                throw new IllegalArgumentException("Month range should be between 0 " +
+                        "(Calender.JANUARY) to 11 (Calendar.DECEMBER)");
+            }
         }
 
         /**
@@ -294,9 +332,14 @@ public class MonthPickerDialog extends AlertDialog implements OnClickListener, O
          * @return
          */
         public Builder setYearRange(int minYear, int maxYear) {
-            this._minYear = minYear;
-            this._maxYear = maxYear;
-            return this;
+            if(minYear <= maxYear){
+                this._minYear = minYear;
+                this._maxYear = maxYear;
+                return this;
+            } else {
+                throw new IllegalArgumentException("Minimum year should be less then Maximum year" );
+            }
+
         }
 
         /**
@@ -308,11 +351,27 @@ public class MonthPickerDialog extends AlertDialog implements OnClickListener, O
          * @param maxYear  ending year
          * @return
          */
-        public Builder setMonthAndYearRange(int minMonth, int maxMonth, int minYear, int maxYear) {
-            this._minMonth = minMonth;
-            this._maxMonth = maxMonth;
-            this._minYear = minYear;
-            this._maxYear = maxYear;
+        public Builder setMonthAndYearRange(@IntRange(from = Calendar.JANUARY, to = Calendar.DECEMBER)
+                                                    int minMonth,
+                                            @IntRange(from = Calendar.JANUARY, to = Calendar.DECEMBER)
+                                                    int maxMonth,
+                                            int minYear, int maxYear) {
+            if (minMonth >= Calendar.JANUARY && minMonth <= Calendar.DECEMBER &&
+                    maxMonth >= Calendar.JANUARY && maxMonth <= Calendar.DECEMBER) {
+                this._minMonth = minMonth;
+                this._maxMonth = maxMonth;
+
+            } else {
+                throw new IllegalArgumentException("Month range should be between 0 " +
+                        "(Calender.JANUARY) to 11 (Calendar.DECEMBER)");
+            }
+
+            if(minYear <= maxYear){
+                this._minYear = minYear;
+                this._maxYear = maxYear;
+            } else {
+                throw new IllegalArgumentException("Minimum year should be less then Maximum year" );
+            }
             return this;
         }
 
@@ -381,6 +440,27 @@ public class MonthPickerDialog extends AlertDialog implements OnClickListener, O
         }
 
         public MonthPickerDialog build() {
+            if(_minMonth > _maxMonth){
+                throw new IllegalArgumentException("Minimum month should always " +
+                        "smaller then maximum month.");
+            }
+
+            if(_minYear > _maxYear){
+                throw new IllegalArgumentException("Minimum year should always " +
+                        "smaller then maximum year.");
+            }
+
+            if(_activatedMonth < _minMonth || _activatedMonth > _maxMonth){
+                throw new IllegalArgumentException("Activated month should always " +
+                        "in between Minimum and maximum month.");
+            }
+
+            if(_activatedYear < _minYear || _activatedMonth > _maxYear){
+                throw new IllegalArgumentException("Activated year should always " +
+                        "in between Minimum year and maximum year.");
+            }
+
+
             monthPickerDialog = new MonthPickerDialog(_context, _callBack, _activatedYear, _activatedMonth);
             if (monthOnly) {
                 monthPickerDialog.showMonthOnly();
@@ -409,7 +489,7 @@ public class MonthPickerDialog extends AlertDialog implements OnClickListener, O
             }
 
             if (title != null) {
-                monthPickerDialog.setMonthPickerTitle(title);
+                monthPickerDialog.setMonthPickerTitle(title.trim());
             }
             return monthPickerDialog;
         }
@@ -420,9 +500,8 @@ public class MonthPickerDialog extends AlertDialog implements OnClickListener, O
      */
     public interface OnDateSetListener {
         /**
-         * @param selectedMonth  The month that was set (0-11) for compatibility with {@link Calendar}.
-         * @param selectedYear The year that was set.
-         *
+         * @param selectedMonth The month that was set (0-11) for compatibility with {@link Calendar}.
+         * @param selectedYear  The year that was set.
          */
         void onDateSet(int selectedMonth, int selectedYear);
     }

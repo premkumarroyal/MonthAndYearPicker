@@ -2,6 +2,7 @@ package com.whiteelephant.monthpicker;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.support.annotation.DrawableRes;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,18 +18,19 @@ import com.example.prem.firstpitch.R;
 import java.util.HashMap;
 
 
-public class YearPickerView extends ListView {
+class YearPickerView extends ListView {
 
     private Context _context;
-    private final YearAdapter _adapter;
-    private final int _viewSize;
-    private final int _childSize;
-    private OnYearSelectedListener _onYearSelectedListener;
-    HashMap<String,Integer> _colors;
+    final YearAdapter _adapter;
+    final int _viewSize;
+    final int _childSize;
+    OnYearSelectedListener _onYearSelectedListener;
+    HashMap<String, Integer> _colors;
 
-    public YearPickerView(Context context){
-        this(context,null);
+    public YearPickerView(Context context) {
+        this(context, null);
     }
+
     public YearPickerView(Context context, AttributeSet attrs) {
         this(context, attrs, R.style.AppTheme);
     }
@@ -87,33 +89,33 @@ public class YearPickerView extends ListView {
         _adapter.setRange(min, max);
     }
 
-    public void setColors(HashMap<String,Integer> colors) {
+    public void setColors(HashMap<String, Integer> colors) {
         this._colors = colors;
     }
 
     private class YearAdapter extends BaseAdapter {
         private final int ITEM_LAYOUT = R.layout.year_label_text_view;
-        private final LayoutInflater mInflater;
-        private int mActivatedYear;
-        private int mMinYear, mMaxYear, mCount;
+        private final LayoutInflater __inflater;
+        private int __activatedYear;
+        private int __minYear, __maxYear, __count;
 
         public YearAdapter(Context context) {
-            mInflater = LayoutInflater.from(context);
+            __inflater = LayoutInflater.from(context);
         }
 
         public void setRange(int min, int max) {
             int count = max - min + 1;
-            if (mMinYear != min ||mMaxYear != max || mCount != count ) {
-                mMinYear = min;
-                mMaxYear = max;
-                mCount = count;
+            if (__minYear != min || __maxYear != max || __count != count) {
+                __minYear = min;
+                __maxYear = max;
+                __count = count;
                 notifyDataSetInvalidated();
             }
         }
 
         public boolean setSelection(int year) {
-            if (mActivatedYear != year) {
-                mActivatedYear = year;
+            if (__activatedYear != year) {
+                __activatedYear = year;
                 notifyDataSetChanged();
                 return true;
             }
@@ -122,7 +124,7 @@ public class YearPickerView extends ListView {
 
         @Override
         public int getCount() {
-            return mCount;
+            return __count;
         }
 
         @Override
@@ -136,11 +138,11 @@ public class YearPickerView extends ListView {
         }
 
         public int getPositionForYear(int year) {
-            return year - mMinYear;
+            return year - __minYear;
         }
 
         public int getYearForPosition(int position) {
-            return mMinYear + position;
+            return __minYear + position;
         }
 
         @Override
@@ -153,24 +155,26 @@ public class YearPickerView extends ListView {
             final TextView v;
             final boolean hasNewView = convertView == null;
             if (hasNewView) {
-                v = (TextView) mInflater.inflate(ITEM_LAYOUT, parent, false);
+                v = (TextView) __inflater.inflate(ITEM_LAYOUT, parent, false);
             } else {
                 v = (TextView) convertView;
             }
             final int year = getYearForPosition(position);
-            final boolean activated = mActivatedYear == year;
+            final boolean activated = __activatedYear == year;
 
-            // if (hasNewView || v.isActivated() != activated) {
             if (hasNewView || v.getTag() != null || v.getTag().equals(activated)) {
                 if (activated) {
-                    v.setTextColor(_colors.get("monthBgSelectedColor"));
+                    if(_colors.containsKey("monthBgSelectedColor")) {
+                        v.setTextColor(_colors.get("monthBgSelectedColor"));
+                    }
                     v.setTextSize(25);
                 } else {
-                    v.setTextColor(_colors.get("monthFontColorNormal"));
+                    if(_colors.containsKey("monthFontColorNormal")) {
+                        v.setTextColor(_colors.get("monthFontColorNormal"));
+                    }
                     v.setTextSize(20);
                 }
-                // v.setActivated(activated);
-                    v.setTag(activated);
+                v.setTag(activated);
 
             }
             v.setText(Integer.toString(year));
@@ -203,27 +207,25 @@ public class YearPickerView extends ListView {
         }
 
         protected void setMaxYear(int maxYear) {
-            Log.d("YearView---","maxYear " +maxYear);
-            mMaxYear = maxYear;
-            mCount = mMaxYear - mMinYear + 1;
-          //  setYear(mActivatedYear);
+            Log.d("YearView---", "maxYear " + maxYear);
+            __maxYear = maxYear;
+            __count = __maxYear - __minYear + 1;
             notifyDataSetInvalidated();
         }
 
         protected void setMinYear(int minYear) {
-            Log.d("YearView---","minYear " +minYear);
-            mMinYear = minYear;
-            mCount = mMaxYear - mMinYear + 1;
-          //  setYear(mActivatedYear);
+            Log.d("YearView---", "minYear " + minYear);
+            __minYear = minYear;
+            __count = __maxYear - __minYear + 1;
             notifyDataSetInvalidated();
         }
 
         protected void setActivatedYear(int activatedYear) {
-            if(activatedYear >= mMinYear && activatedYear <= mMaxYear) {
+            if (activatedYear >= __minYear && activatedYear <= __maxYear) {
                 Log.d("YearView---", "current year " + activatedYear);
-                mActivatedYear = activatedYear;
+                __activatedYear = activatedYear;
                 setYear(activatedYear);
-            }else{
+            } else {
                 throw new IllegalArgumentException("activated date is not in range");
             }
         }
@@ -251,14 +253,21 @@ public class YearPickerView extends ListView {
         void onYearChanged(YearPickerView view, int year);
     }
 
-    protected void setMinYear(int minYear){
+    protected void setMinYear(int minYear) {
         _adapter.setMinYear(minYear);
     }
 
-    protected void setMaxYear(int maxYear){
+    protected void setMaxYear(int maxYear) {
         _adapter.setMaxYear(maxYear);
     }
 
-    protected void setActivatedYear(int activatedYear){ _adapter.setActivatedYear(activatedYear); }
+    protected void setActivatedYear(int activatedYear) {
+        _adapter.setActivatedYear(activatedYear);
+    }
+
+    @Override
+    public void setSelector(@DrawableRes int resID) {
+        super.setSelector(android.R.color.transparent);
+    }
 }
 

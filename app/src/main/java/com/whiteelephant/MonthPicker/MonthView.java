@@ -14,7 +14,7 @@ import com.example.prem.firstpitch.R;
 
 import java.util.HashMap;
 
-public class MonthView extends ListView {
+class MonthView extends ListView {
 
     // constants
     private static final int DEFAULT_HEIGHT = 100;
@@ -54,7 +54,7 @@ public class MonthView extends ListView {
     }
 
     public MonthView(Context context, AttributeSet attrs) {
-        this(context, attrs, R.style.TestView);
+        this(context, attrs, R.style.MonthPickerDialogStyle);
     }
 
     public MonthView(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -84,7 +84,8 @@ public class MonthView extends ListView {
 
         _monthNumberSelectedPaint = new Paint();
         _monthNumberSelectedPaint.setAntiAlias(true);
-        _monthNumberSelectedPaint.setColor(_monthBgSelectedColor);
+        if (_monthBgSelectedColor != 0)
+            _monthNumberSelectedPaint.setColor(_monthBgSelectedColor);
         // _monthNumberSelectedPaint.setAlpha(200);
         _monthNumberSelectedPaint.setTextAlign(Paint.Align.CENTER);
         _monthNumberSelectedPaint.setStyle(Paint.Style.FILL);
@@ -92,7 +93,8 @@ public class MonthView extends ListView {
 
         _monthNumberPaint = new Paint();
         _monthNumberPaint.setAntiAlias(true);
-        _monthNumberPaint.setColor(_monthFontColorNormal);
+        if (_monthFontColorNormal != 0)
+            _monthNumberPaint.setColor(_monthFontColorNormal);
         _monthNumberPaint.setTextSize(_monthTextSize);
         _monthNumberPaint.setTextAlign(Paint.Align.CENTER);
         _monthNumberPaint.setStyle(Paint.Style.FILL);
@@ -100,7 +102,8 @@ public class MonthView extends ListView {
 
         _monthNumberDisabledPaint = new Paint();
         _monthNumberDisabledPaint.setAntiAlias(true);
-        _monthNumberDisabledPaint.setColor(_monthFontColorDisabled);
+        if (_monthFontColorDisabled != 0)
+            _monthNumberDisabledPaint.setColor(_monthFontColorDisabled);
         _monthNumberDisabledPaint.setTextSize(_monthTextSize);
         _monthNumberDisabledPaint.setTextAlign(Paint.Align.CENTER);
         _monthNumberDisabledPaint.setStyle(Paint.Style.FILL);
@@ -124,10 +127,13 @@ public class MonthView extends ListView {
             int x = (2 * j + 1) * dayWidthHalf + _padding;
             if (_selectedMonth == month) {
                 canvas.drawCircle(x, y - (_monthTextSize / 3), _monthSelectedCircleSize, _monthNumberSelectedPaint);
-                _monthNumberPaint.setColor(_monthFontColorSelected);
-            }else{
-                _monthNumberPaint.setColor(_monthFontColorNormal);
+                if (_monthFontColorSelected != 0)
+                    _monthNumberPaint.setColor(_monthFontColorSelected);
+            } else {
+                if (_monthFontColorNormal != 0)
+                    _monthNumberPaint.setColor(_monthFontColorNormal);
             }
+
 
             final Paint paint = (month < _minMonth || month > _maxMonth) ?
                     _monthNumberDisabledPaint : _monthNumberPaint;
@@ -178,7 +184,7 @@ public class MonthView extends ListView {
 
     protected void setColors(HashMap<String, Integer> colors) {
         Log.d("MonthView -> ", "colors size : " + colors.size());
-        if (colors.containsKey("monthBgSelectedColor"))
+        if (colors.containsKey("monthBgSelectedColor") )
             _monthBgSelectedColor = colors.get("monthBgSelectedColor");
         if (colors.containsKey("monthFontColorNormal"))
             _monthFontColorNormal = colors.get("monthFontColorNormal");
