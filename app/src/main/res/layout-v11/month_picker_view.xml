@@ -27,7 +27,8 @@
         android:id="@+id/action_btn_lay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="10dp">
+        android:paddingBottom="10dp"
+        android:paddingRight="20dp">
 
 
         <TextView
@@ -38,8 +39,9 @@
             android:text="OK"
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
-            android:paddingRight="32dp"
-            android:paddingLeft="20dp"
+            android:paddingRight="24dp"
+            android:paddingLeft="24dp"
+            android:textStyle="bold"
             android:foreground="?android:attr/selectableItemBackground"/>
 
         <TextView
@@ -50,8 +52,9 @@
             android:text="CANCEL"
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
-            android:paddingRight="20dp"
-            android:paddingLeft="20dp"
+            android:paddingRight="24dp"
+            android:paddingLeft="24dp"
+            android:textStyle="bold"
             android:foreground="?android:attr/selectableItemBackground"/>
     </RelativeLayout>
 

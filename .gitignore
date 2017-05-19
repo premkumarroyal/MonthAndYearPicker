@@ -14,9 +14,8 @@
 .project
 .settings
 eclipsebin
-*.txt
-/*.txt
 
+/A_Improvments.txt
 
 bin
 gen
@@ -83,3 +82,4 @@ captures/
 # Keystore files
 *.jks
 improvments
+A_Improvments.java

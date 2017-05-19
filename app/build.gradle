@@ -1,4 +1,8 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
+
+version = "1.0.0"
 
 android {
     compileSdkVersion 23
@@ -8,7 +12,7 @@ android {
         minSdkVersion 9
         targetSdkVersion 23
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
     }
     buildTypes {
         release {
@@ -18,9 +22,73 @@ android {
     }
 }
 
+ext {
+
+    def v_bintrayRepo = ''
+    def v_bintrayName = ''
+    def v_publishedGroupId = ''
+    def v_libraryName = ''
+    def v_artifact = ''
+    def v_libraryDescription = ''
+    def v_gitUrl = ''
+    def v_libraryVersion = ''
+    def v_developerId = ''
+    def v_developerName = ''
+    def v_developerEmail = ''
+
+    def versionPropsFile = file('bintray.properties')
+    def Properties versionProps = new Properties()
+
+    if (versionPropsFile.canRead()) {
+        versionProps.load(new FileInputStream(versionPropsFile))
+
+        v_bintrayRepo = versionProps['bintrayRepo'].toString()
+        v_bintrayName = versionProps['bintrayName'].toString()
+        v_publishedGroupId = versionProps['publishedGroupId'].toString()
+        v_libraryName = versionProps['libraryName'].toString()
+        v_artifact = versionProps['artifact'].toString()
+        v_libraryDescription = versionProps['libraryDescription'].toString()
+        v_gitUrl = versionProps['gitUrl'].toString()
+        v_libraryVersion = versionProps['libraryVersion'].toString()
+        v_developerId = versionProps['developerId'].toString()
+        v_developerName = versionProps['developerName'].toString()
+        v_developerEmail = versionProps['developerEmail'].toString()
+
+    } else {
+        throw new FileNotFoundException("Could not read bintray.properties!")
+    }
+
+    bintrayRepo = "${v_bintrayRepo}"
+    bintrayName = "${v_bintrayName}"
+
+
+    publishedGroupId = "${v_publishedGroupId}"
+    libraryName = "${v_libraryName}"
+    artifact = "${v_artifact}"
+
+    libraryDescription = "${v_libraryDescription}"
+
+    siteUrl = ''
+    gitUrl = "${v_gitUrl}"
+
+    libraryVersion = "${v_libraryVersion}"
+
+    developerId = "${v_developerId}"
+    developerName = "${v_developerName}"
+    developerEmail = "${v_developerEmail}"
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.4.0'
     compile 'com.android.support:design:23.4.0'
 }
+
+
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
