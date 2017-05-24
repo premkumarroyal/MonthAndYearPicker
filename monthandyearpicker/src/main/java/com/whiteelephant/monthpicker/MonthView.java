@@ -134,7 +134,6 @@ class MonthView extends ListView {
                     _monthNumberPaint.setColor(_monthFontColorNormal);
             }
 
-
             final Paint paint = (month < _minMonth || month > _maxMonth) ?
                     _monthNumberDisabledPaint : _monthNumberPaint;
             canvas.drawText(_monthNames[month], x, y, paint);
@@ -167,7 +166,8 @@ class MonthView extends ListView {
         if (day < 0 || day > _numCells) {
             return -1;
         }
-        return day;
+        // position - 1 to match with Calender.JANUARY and Calender.DECEMBER
+        return day - 1;
     }
 
     /**
@@ -183,7 +183,6 @@ class MonthView extends ListView {
     }
 
     protected void setColors(HashMap<String, Integer> colors) {
-        Log.d("MonthView -> ", "colors size : " + colors.size());
         if (colors.containsKey("monthBgSelectedColor") )
             _monthBgSelectedColor = colors.get("monthBgSelectedColor");
         if (colors.containsKey("monthFontColorNormal"))

@@ -440,6 +440,7 @@ public class MonthPickerDialog extends AlertDialog implements OnClickListener, O
         }
 
         public MonthPickerDialog build() {
+
             if(_minMonth > _maxMonth){
                 throw new IllegalArgumentException("Minimum month should always " +
                         "smaller then maximum month.");
@@ -455,7 +456,7 @@ public class MonthPickerDialog extends AlertDialog implements OnClickListener, O
                         "in between Minimum and maximum month.");
             }
 
-            if(_activatedYear < _minYear || _activatedMonth > _maxYear){
+            if(_activatedYear < _minYear || _activatedYear > _maxYear){
                 throw new IllegalArgumentException("Activated year should always " +
                         "in between Minimum year and maximum year.");
             }

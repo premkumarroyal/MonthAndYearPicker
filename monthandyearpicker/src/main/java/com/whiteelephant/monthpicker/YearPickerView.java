@@ -207,14 +207,12 @@ class YearPickerView extends ListView {
         }
 
         protected void setMaxYear(int maxYear) {
-            Log.d("YearView---", "maxYear " + maxYear);
             __maxYear = maxYear;
             __count = __maxYear - __minYear + 1;
             notifyDataSetInvalidated();
         }
 
         protected void setMinYear(int minYear) {
-            Log.d("YearView---", "minYear " + minYear);
             __minYear = minYear;
             __count = __maxYear - __minYear + 1;
             notifyDataSetInvalidated();
@@ -222,7 +220,6 @@ class YearPickerView extends ListView {
 
         protected void setActivatedYear(int activatedYear) {
             if (activatedYear >= __minYear && activatedYear <= __maxYear) {
-                Log.d("YearView---", "current year " + activatedYear);
                 __activatedYear = activatedYear;
                 setYear(activatedYear);
             } else {

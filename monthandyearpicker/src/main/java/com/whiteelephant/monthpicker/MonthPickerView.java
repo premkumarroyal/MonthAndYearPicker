@@ -20,6 +20,7 @@ import com.example.prem.firstpitch.R;
 
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Locale;
 
 class MonthPickerView extends FrameLayout {
 
@@ -29,7 +30,6 @@ class MonthPickerView extends FrameLayout {
     MonthViewAdapter _monthViewAdapter;
     TextView _month, _year, _title;
     Context _context;
-    String _headerTitle;
     int _headerFontColorSelected, _headerFontColorNormal;
     boolean _showMonthOnly;
     int _selectedMonth, _selectedYear;
@@ -62,8 +62,6 @@ class MonthPickerView extends FrameLayout {
 
         // getting default values based on the user's theme.
 
-
-
         /*
 
        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -83,7 +81,6 @@ class MonthPickerView extends FrameLayout {
         int color = a.getColor(0, 0);
 
         a.recycle();
-
 
         // OR
 
@@ -180,10 +177,6 @@ class MonthPickerView extends FrameLayout {
             map.put("monthFontColorSelected", monthFontColorSelected);
         if (monthFontColorDisabled != 0)
             map.put("monthFontColorDisabled", monthFontColorDisabled);
-        Log.d("----------------", " headerBgColor" + headerBgColor + " headerFontColorNormal" + _headerFontColorNormal + " headerFontColorSelected : "
-                + _headerFontColorSelected + " headerTitleColor : " + headerTitleColor + " monthBgColor:  " + monthBgColor + " monthBgSelectedColor:  "
-                + monthBgSelectedColor + " monthFontColorDisabled : " + monthFontColorDisabled + " monthFontColorNormal : "
-                + monthFontColorNormal + " monthFontColorSelected: " + monthFontColorSelected);
 
         a.recycle();
 
@@ -235,7 +228,7 @@ class MonthPickerView extends FrameLayout {
             public void onDaySelected(MonthViewAdapter view, int selectedMonth) {
                 Log.d("----------------", "MonthPickerDialogStyle selected month = " + selectedMonth);
                 MonthPickerView.this._selectedMonth = selectedMonth;
-                _month.setText(_context.getResources().getStringArray(R.array.months)[selectedMonth - 1]);
+                _month.setText(_context.getResources().getStringArray(R.array.months)[selectedMonth]);
                 if (!_showMonthOnly) {
                     _monthList.setVisibility(View.GONE);
                     _yearView.setVisibility(View.VISIBLE);
@@ -338,6 +331,7 @@ class MonthPickerView extends FrameLayout {
     protected void setActivatedMonth(int activatedMonth) {
         if (activatedMonth >= Calendar.JANUARY && activatedMonth <= Calendar.DECEMBER) {
             _monthViewAdapter.setActivatedMonth(activatedMonth);
+           _month.setText(_context.getResources().getStringArray(R.array.months)[activatedMonth]);
         } else {
             throw new IllegalArgumentException("Month out of range please send months between Calendar.JANUARY, Calendar.DECEMBER");
         }
@@ -346,6 +340,7 @@ class MonthPickerView extends FrameLayout {
 
     protected void setActivatedYear(int activatedYear) {
         _yearView.setActivatedYear(activatedYear);
+        _year.setText(Integer.toString(activatedYear));
     }
 
     protected void setMonthRange(int minMonth, int maxMonth) {
@@ -372,8 +367,8 @@ class MonthPickerView extends FrameLayout {
     }
 
     protected void setTitle(String dialogTitle) {
-        if (dialogTitle != null) {
-            this._headerTitle = dialogTitle;
+        if (dialogTitle != null && dialogTitle.trim().length() > 0) {
+            _title.setText(dialogTitle);
             _title.setVisibility(VISIBLE);
         } else {
             _title.setVisibility(GONE);

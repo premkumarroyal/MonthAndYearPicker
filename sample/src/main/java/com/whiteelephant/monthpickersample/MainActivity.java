@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        final Calendar today = Calendar.getInstance();
         findViewById(R.id.month_picker).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -26,9 +27,9 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onDateSet(int selectedMonth, int selectedYear) {
                         Log.d(TAG, "selectedMonth : " + selectedMonth + " selectedYear : " + selectedYear);
-                        Toast.makeText(MainActivity.this, "Date setted with month" + selectedMonth + " year " + selectedYear, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "Date set with month" + selectedMonth + " year " + selectedYear, Toast.LENGTH_SHORT).show();
                     }
-                }, 2020, Calendar.JUNE);
+                }, today.get(Calendar.YEAR), today.get(Calendar.MONTH));
 
                 builder.setOnMonthChangedListener(new MonthPickerDialog.OnMonthChangedListener() {
                     @Override
@@ -45,25 +46,25 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, " Selected year : " + selectedYear, Toast.LENGTH_SHORT).show();
                     }
                 });
-                builder.setMinYear(1980);
-                builder.setMinYear(2000);
+               /* builder.setMinYear(1980);
+                builder.setMaxYear(2030);
 
-                builder.build().show();
+                builder.build().show();*/
 
-                /*builder.setActivatedMonth(Calendar.OCTOBER)
-                        .setMaxMonth(Calendar.OCTOBER)
+                builder.setActivatedMonth(Calendar.JULY)
+                       // .setMaxMonth(Calendar.OCTOBER)
                         .setMinYear(1990)
                         .setActivatedYear(2005)
-                        .setMinMonth(Calendar.JULY)
+                        .setMinMonth(Calendar.FEBRUARY)
                         .setMaxYear(2015)
                         .setTitle("Select sales month")
-                        .setMonthRange(Calendar.FEBRUARY, Calendar.OCTOBER)
-                        .setYearRange(1890, 1890)
-                        .setMonthAndYearRange(Calendar.FEBRUARY, Calendar.OCTOBER, 1890, 1890)
-                        *//*.showMonthOnly()
-                        .showYearOnly()*//*
+                       // .setMonthRange(Calendar.FEBRUARY, Calendar.OCTOBER)
+                       // .setYearRange(1890, 1890)
+                       // .setMonthAndYearRange(Calendar.FEBRUARY, Calendar.OCTOBER, 1890, 1890)
+                        .showMonthOnly()
+                       // .showYearOnly()
                         .build()
-                        .show();*/
+                        .show();
             }
         });
 

@@ -49,7 +49,6 @@ class MonthViewAdapter extends BaseAdapter {
             v = (MonthView) convertView;
         } else {
             v = new MonthView(_context);
-            Log.d("MonthPickerAdapter", "SetAdapter map is here -> " + _colors.size());
             v.setColors(_colors);
 
             // Set up the new view
@@ -76,7 +75,7 @@ class MonthViewAdapter extends BaseAdapter {
             Log.d("MonthViewAdapter", "onDayClick " + day);
             if (isCalendarInRange(day)) {
                 Log.d("MonthViewAdapter", "day not null && Calender in range " + day);
-                setSelectedDay(day);
+                setSelectedMonth(day);
                 if (mOnDaySelectedListener != null) {
                     mOnDaySelectedListener.onDaySelected(MonthViewAdapter.this, day);
                 }
@@ -84,18 +83,18 @@ class MonthViewAdapter extends BaseAdapter {
         }
     };
 
-    private boolean isCalendarInRange(int value) {
-        return value > _minMonth && value <= _maxMonth + 1;
+    boolean isCalendarInRange(int value) {
+        return value >= _minMonth && value <= _maxMonth;
     }
 
     /**
      * Updates the selected day and related parameters.
      *
-     * @param day The day to highlight
+     * @param month The day to highlight
      */
-    public void setSelectedDay(int day) {
-        Log.d("MonthViewAdapter", "setSelectedDay : " + day);
-        _activatedMonth = day - 1;
+    public void setSelectedMonth(int month) {
+        Log.d("MonthViewAdapter", "setSelectedMonth : " + month);
+        _activatedMonth = month;
         notifyDataSetChanged();
     }
 
@@ -103,7 +102,7 @@ class MonthViewAdapter extends BaseAdapter {
     public void setRange() {
 
         _minMonth = Calendar.JANUARY;
-        _maxMonth = Calendar.DECEMBER + 1;
+        _maxMonth = Calendar.DECEMBER;
         _activatedMonth = Calendar.AUGUST;
         notifyDataSetInvalidated();
     }
@@ -118,7 +117,7 @@ class MonthViewAdapter extends BaseAdapter {
     }
 
     public interface OnDaySelectedListener {
-        void onDaySelected(MonthViewAdapter view, int day);
+        void onDaySelected(MonthViewAdapter view, int month);
     }
 
     void setMaxMonth(int maxMonth) {
@@ -148,6 +147,5 @@ class MonthViewAdapter extends BaseAdapter {
 
     void setColors(HashMap map) {
         _colors = map;
-        Log.d("MonthPickerDialogStyle", "map is here -> " + map.size());
     }
 }
