@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                        // .setMonthRange(Calendar.FEBRUARY, Calendar.OCTOBER)
                        // .setYearRange(1890, 1890)
                        // .setMonthAndYearRange(Calendar.FEBRUARY, Calendar.OCTOBER, 1890, 1890)
-                        .showMonthOnly()
+                        //.showMonthOnly()
                        // .showYearOnly()
                         .build()
                         .show();

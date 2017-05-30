@@ -33,6 +33,7 @@ class YearPickerView extends ListView {
 
     public YearPickerView(Context context, AttributeSet attrs) {
         this(context, attrs, R.style.AppTheme);
+        super.setSelector(android.R.color.transparent);
     }
 
     public YearPickerView(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -262,9 +263,5 @@ class YearPickerView extends ListView {
         _adapter.setActivatedYear(activatedYear);
     }
 
-    @Override
-    public void setSelector(@DrawableRes int resID) {
-        super.setSelector(android.R.color.transparent);
-    }
 }
 
