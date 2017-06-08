@@ -98,6 +98,7 @@ class MonthPickerView extends FrameLayout {
         int monthFontColorSelected = a.getColor(R.styleable.monthPickerDialog_monthFontColorSelected, 0);
         int monthFontColorDisabled = a.getColor(R.styleable.monthPickerDialog_monthFontColorDisabled, 0);
         int headerTitleColor = a.getColor(R.styleable.monthPickerDialog_headerTitleColor, 0);
+        int actionButtonColor = a.getColor(R.styleable.monthPickerDialog_dialogActionButtonColor, 0);
 
          if (monthFontColorNormal == 0) {
 
@@ -192,10 +193,14 @@ class MonthPickerView extends FrameLayout {
         TextView cancel = (TextView) findViewById(R.id.cancel_action);
 
 
-        if (headerBgColor != 0) {
+        if (actionButtonColor != 0) {
+            ok.setTextColor(actionButtonColor);
+            cancel.setTextColor(actionButtonColor);
+        } else {
             ok.setTextColor(headerBgColor);
             cancel.setTextColor(headerBgColor);
         }
+
         if (_headerFontColorSelected != 0)
             _month.setTextColor(_headerFontColorSelected);
         if (_headerFontColorNormal != 0)

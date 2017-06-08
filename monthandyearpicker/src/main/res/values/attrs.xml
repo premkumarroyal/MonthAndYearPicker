@@ -13,6 +13,8 @@
         <attr name="monthFontColorSelected" format="color" />
         <attr name="monthFontColorNormal" format="color" />
         <attr name="monthFontColorDisabled" format="color" />
+        <attr name="dialogActionButtonColor" format="color" />
+
 
     </declare-styleable>
 </resources>

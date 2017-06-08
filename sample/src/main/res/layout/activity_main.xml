@@ -12,18 +12,20 @@
     tools:context="com.whiteelephant.monthpickersample.MainActivity">
 
     <Button
-
         android:id="@+id/month_picker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
         android:text="Month Picker" />
 
-    <TextView
+    <Button
         android:id="@+id/date_picker"
-        android:layout_marginTop="20dp"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
         android:gravity="center"
-        android:text="Hello world"
-        android:textSize="16sp"/>
+        android:text="Date Picker"
+        android:layout_gravity="center" />
+
 </LinearLayout>
