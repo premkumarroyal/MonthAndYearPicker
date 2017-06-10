@@ -16,18 +16,14 @@ setMonthRange(int minMonth, int maxMonth) | set both max and min sections.
 setActivatedMonth(activatedMonth) | selected the month when picker opens.
 setMaxYear(int maxYear) | Maximum year that will be shown in picker.
 setMinYear(int minYear) | Minimum year that will be shown in picker.
-setYearRange(int minYear,
-int maxYear) | set both max and min selections.
+setYearRange(int minYear, int maxYear) | set both max and min selections.
 setActivatedYear(activatedYear) | selected the year when picker opens.
-setMonthAndYearRange(int minMonth, int maxMonth, 
-int minYear, int maxYear) | set month and year min and max values at once.
+setMonthAndYearRange(int minMonth, int maxMonth, int minYear, int maxYear) | set month and year min and max values at once.
 showMonthOnly() | Only month selection will be shown.
 showYearOnly() | Only year selection will be shown.
 setTitle(String title) | set the title for Month Picker Dialog. By default title will be hidden, it will be visible if value set.
-setOnMonthChangedListener(MonthPickerDialog
-.OnMonthChangedListener onMonthChange); | Listener for select month
-setOnYearChangedListener(MonthPickerDialog
-.OnYearChangedListener onYearChange); | Listener for year select year
+setOnMonthChangedListener(MonthPickerDialog.OnMonthChangedListener onMonthChange); | Listener for select month
+setOnYearChangedListener(MonthPickerDialog.OnYearChangedListener onYearChange); | Listener for year select year
 
 
 ## Styling
