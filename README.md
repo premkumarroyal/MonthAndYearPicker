@@ -4,37 +4,39 @@ Month and Year Picker allow user to pick only month and year or only month or on
 
 
 ## Listeners
-setOnMonthChangedListener(OnMonthChangedListener());
-setOnYearChangedListener(OnYearChangedListener());
+    setOnMonthChangedListener(OnMonthChangedListener());
+    setOnYearChangedListener(OnYearChangedListener());
 
 ## Methods
+ Methods | Docs
+------------ | -------------
+setMaxMonth(int maxMonth) |  Maximum month that user can select.
+setMinMonth(int minMonth) |  Minimum month that user can select.
+setMonthRange(int minMonth, int maxMonth) | set both max and min sections.
+setActivatedMonth(activatedMonth) | selected the month when picker opens.
 
-1. setMaxMonth(int maxMonth) :  Maximum month that user can select.
-2. setMinMonth(int minMonth) :  Minimum month that user can select.
-3. setMonthRange(int minMonth, int maxMonth) : set both max and min sections.
-4. setActivatedMonth(activatedMonth) : selected the month when picker opens.
+setMaxYear(int maxYear) | Maximum year that will be shown in picker.
 
-5. setMaxYear(int maxYear) : Maximum year that will be shown in picker.
-6. setMinYear(int minYear) : Minimum year that will be shown in picker.
-7. setYearRange(int minYear,int maxYear) : set both max and min selections.
-8. setActivatedYear(activatedYear) : selected the year when picker opens.
+setMinYear(int minYear) | Minimum year that will be shown in picker.
+setYearRange(int minYear,int maxYear) | set both max and min selections.
+setActivatedYear(activatedYear) | selected the year when picker opens.
 
-9. setMonthAndYearRange(int minMonth, int maxMonth, int minYear, int maxYear) : set month and year min and max values at once.
+setMonthAndYearRange(int minMonth, int maxMonth, int minYear, int maxYear) | set month and year min and max values at once.
 
-10. showMonthOnly() : Only month selection will be shown.
-11. showYearOnly() : Only year selection will be shown.
+showMonthOnly() | Only month selection will be shown.
+showYearOnly() | Only year selection will be shown.
 
-12. setTitle(String title) : set the title for Month Picker Dialog. By default title will be hidden, it will be visible if value set.
+setTitle(String title) | set the title for Month Picker Dialog. By default title will be hidden, it will be visible if value set.
 
-13. setOnMonthChangedListener(MonthPickerDialog.OnMonthChangedListener onMonthChange);
-14. setOnYearChangedListener(new MonthPickerDialog.OnYearChangedListener onYearChange);
+setOnMonthChangedListener(MonthPickerDialog.OnMonthChangedListener onMonthChange); | Listener for select month
+setOnYearChangedListener(new MonthPickerDialog.OnYearChangedListener onYearChange); | Listener for year select year
 
 
 ## Styling
 
 Month and Year picker by default pick the color from theme if you declared colorAccent. If you want to change color's you can override the theme as below.
 
- <style name="MonthPickerDialogStyle" >
+     <style name="MonthPickerDialogStyle" >
         <item name="monthBgColor">@color/bgColor</item>
         <item name="monthBgSelectedColor">@color/colorAccent</item>
         <item name="monthFontColorSelected">@color/selectionColor</item>
@@ -47,7 +49,9 @@ Month and Year picker by default pick the color from theme if you declared color
         <item name="headerTitleColor">#fff</item>
 
         <item name="dialogActionButtonColor">@color/colorAccent</item>
-</style>
+    </style>
+
+
 
 
 
