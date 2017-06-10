@@ -2,7 +2,45 @@
 
 Month and Year Picker allow user to pick only month and year or only month or only year as required. You will get notified for all action's such as on selection of date, on selection of month and on section of year.
 
+# Code
 
+     MonthPickerDialog.Builder builder = new MonthPickerDialog.Builder(MainActivity.this, new MonthPickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(int selectedMonth, int selectedYear) {
+                        Log.d(TAG, "selectedMonth : " + selectedMonth + " selectedYear : " + selectedYear);
+                        Toast.makeText(MainActivity.this, "Date set with month" + selectedMonth + " year " + selectedYear, Toast.LENGTH_SHORT).show();
+                    }
+                }, today.get(Calendar.YEAR), today.get(Calendar.MONTH));
+
+                builder.setActivatedMonth(Calendar.JULY)
+                        .setMinYear(1990)
+                        .setActivatedYear(2017)
+                        .setMaxYear(2030)
+                        .setMinMonth(Calendar.FEBRUARY)
+                        .setTitle("Select trading month")
+                        .setMonthRange(Calendar.FEBRUARY, Calendar.NOVEMBER)
+                        // .setMaxMonth(Calendar.OCTOBER)
+                        // .setYearRange(1890, 1890)
+                        // .setMonthAndYearRange(Calendar.FEBRUARY, Calendar.OCTOBER, 1890, 1890)
+                        //.showMonthOnly()
+                        // .showYearOnly()
+                        .setOnMonthChangedListener(new MonthPickerDialog.OnMonthChangedListener() {
+                        @Override
+                        public void onMonthChanged(int selectedMonth) {
+                            Log.d(TAG, "Selected month : " + selectedMonth);
+                            // Toast.makeText(MainActivity.this, " Selected month : " + selectedMonth, Toast.LENGTH_SHORT).show();
+                        }
+                        })
+                            .setOnYearChangedListener(new MonthPickerDialog.OnYearChangedListener() {
+                        @Override
+                        public void onYearChanged(int selectedYear) {
+                            Log.d(TAG, "Selected year : " + selectedYear);
+                            // Toast.makeText(MainActivity.this, " Selected year : " + selectedYear, Toast.LENGTH_SHORT).show();
+                        }
+                         })
+                .build()
+                .show();
+                        
 ## Listeners
     setOnMonthChangedListener(OnMonthChangedListener());
     setOnYearChangedListener(OnYearChangedListener());
