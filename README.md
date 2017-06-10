@@ -6,7 +6,7 @@ Month and Year Picker allow user to pick only month and year or only month or on
 
 ## Sample Project output:
 
-![MonthAndYearPicker](https://github.com/premkumarroyal/MonthAndYearPicker/blob/master/sample/src/main/res/raw/choose_year.gif "Choose Year") 
+![MonthAndYearPicker](https://github.com/premkumarroyal/MonthAndYearPicker/blob/master/sample/src/main/res/raw/datepicker.gif?raw=true "Month and Year Picker") ![MonthAndYearPicker](https://github.com/premkumarroyal/MonthAndYearPicker/blob/master/sample/src/main/res/raw/choose_month.gif?raw=true "Choose Month") ![MonthAndYearPicker](https://github.com/premkumarroyal/MonthAndYearPicker/blob/master/sample/src/main/res/raw/choose_year.gif?raw=true "Choose Year") ![MonthAndYearPicker](https://github.com/premkumarroyal/MonthAndYearPicker/blob/master/sample/src/main/res/raw/choose_quantity.gif?raw=true "Choose Quantity")
 
 
 # Code
