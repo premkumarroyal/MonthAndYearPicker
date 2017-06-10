@@ -74,8 +74,6 @@ Month and Year picker by default pick the color from theme if you declared color
     </style>
 
 
-## Usage :
-
 ## Usage 
 
 Add Gradle Dependency in your build.gradle file
