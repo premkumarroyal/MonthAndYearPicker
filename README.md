@@ -4,12 +4,12 @@ Month and Year Picker allow user to pick only month and year or only month or on
 
 # Code
 
-     MonthPickerDialog.Builder builder = new MonthPickerDialog.Builder(MainActivity.this, new        MonthPickerDialog.OnDateSetListener() {
+     MonthPickerDialog.Builder builder = new MonthPickerDialog.Builder(MainActivity.this, 
+     new MonthPickerDialog.OnDateSetListener() {
        @Override
-       public void onDateSet(int selectedMonth, int selectedYear) {
-         // on date set
-        }
+       public void onDateSet(int selectedMonth, int selectedYear) { // on date set }
      }, today.get(Calendar.YEAR), today.get(Calendar.MONTH));
+    
     builder.setActivatedMonth(Calendar.JULY)
            .setMinYear(1990)
            .setActivatedYear(2017)
@@ -24,12 +24,10 @@ Month and Year Picker allow user to pick only month and year or only month or on
            // .showYearOnly()
            .setOnMonthChangedListener(new MonthPickerDialog.OnMonthChangedListener() {
              @Override
-             public void onMonthChanged(int selectedMonth) { // on month selected }
-                })
+             public void onMonthChanged(int selectedMonth) { // on month selected } })
            .setOnYearChangedListener(new MonthPickerDialog.OnYearChangedListener() {
               @Override
-              public void onYearChanged(int selectedYear) { // on year selected }
-                 })
+              public void onYearChanged(int selectedYear) { // on year selected } })
             .build()
             .show();
                         
