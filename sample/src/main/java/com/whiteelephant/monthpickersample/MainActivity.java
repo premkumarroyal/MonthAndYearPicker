@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         setNormalPicker();
 
          // goto styles.xml and change the monthPickerStyles for below three layouts
-        
+
         //setBottleView();
         //chooseMonthOnly();
         //chooseYearOnly();
@@ -48,40 +48,35 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }, today.get(Calendar.YEAR), today.get(Calendar.MONTH));
 
-                builder.setOnMonthChangedListener(new MonthPickerDialog.OnMonthChangedListener() {
-                    @Override
-                    public void onMonthChanged(int selectedMonth) {
-                        Log.d(TAG, "Selected month : " + selectedMonth);
-                        // Toast.makeText(MainActivity.this, " Selected month : " + selectedMonth, Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-                builder.setOnYearChangedListener(new MonthPickerDialog.OnYearChangedListener() {
-                    @Override
-                    public void onYearChanged(int selectedYear) {
-                        Log.d(TAG, "Selected year : " + selectedYear);
-                        // Toast.makeText(MainActivity.this, " Selected year : " + selectedYear, Toast.LENGTH_SHORT).show();
-                    }
-                });
-               /* builder.setMinYear(1980);
-                builder.setMaxYear(2030);
-
-                builder.build().show();*/
-
                 builder.setActivatedMonth(Calendar.JULY)
-                        // .setMaxMonth(Calendar.OCTOBER)
                         .setMinYear(1990)
                         .setActivatedYear(2017)
-                        .setMinMonth(Calendar.FEBRUARY)
                         .setMaxYear(2030)
+                        .setMinMonth(Calendar.FEBRUARY)
                         .setTitle("Select trading month")
                         .setMonthRange(Calendar.FEBRUARY, Calendar.NOVEMBER)
+                        // .setMaxMonth(Calendar.OCTOBER)
                         // .setYearRange(1890, 1890)
                         // .setMonthAndYearRange(Calendar.FEBRUARY, Calendar.OCTOBER, 1890, 1890)
                         //.showMonthOnly()
                         // .showYearOnly()
-                        .build()
-                        .show();
+                        .setOnMonthChangedListener(new MonthPickerDialog.OnMonthChangedListener() {
+                        @Override
+                        public void onMonthChanged(int selectedMonth) {
+                            Log.d(TAG, "Selected month : " + selectedMonth);
+                            // Toast.makeText(MainActivity.this, " Selected month : " + selectedMonth, Toast.LENGTH_SHORT).show();
+                        }
+                        })
+                            .setOnYearChangedListener(new MonthPickerDialog.OnYearChangedListener() {
+                        @Override
+                        public void onYearChanged(int selectedYear) {
+                            Log.d(TAG, "Selected year : " + selectedYear);
+                            // Toast.makeText(MainActivity.this, " Selected year : " + selectedYear, Toast.LENGTH_SHORT).show();
+                        }
+                         })
+                .build()
+                .show();
+
             }
         });
 
