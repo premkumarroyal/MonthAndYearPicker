@@ -2,6 +2,13 @@
 
 Month and Year Picker allow user to pick only month and year or only month or only year as required. You will get notified for all action's such as on selection of date, on selection of month and on section of year.
 
+
+
+## Sample Project output:
+
+![MonthAndYearPicker](https://github.com/premkumarroyal/MonthAndYearPicker/blob/master/sample/src/main/res/raw/choose_year.gif "Choose Year") 
+
+
 # Code
 
      MonthPickerDialog.Builder builder = new MonthPickerDialog.Builder(MainActivity.this, 
