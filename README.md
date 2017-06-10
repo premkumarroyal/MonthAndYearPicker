@@ -74,7 +74,23 @@ Month and Year picker by default pick the color from theme if you declared color
     </style>
 
 
+## Usage :
 
+## Usage 
+
+Add Gradle Dependency in your build.gradle file
+
+    compile 'com.whiteelephant:gifplayer:1.2.0'
+
+or Maven
+
+    <dependency>
+      <groupId>com.whiteelephant</groupId>
+      <artifactId>monthandyearpicker</artifactId>
+      <version>1.1.1</version>
+      <type>pom</type>   
+    </dependency>
+   
 
 
 
