@@ -35,8 +35,6 @@ obj
 .gradle
 jniLibs
 build
-local.properties
-bintray.properties
 reports
 
 

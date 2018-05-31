@@ -1,12 +1,10 @@
 package com.whiteelephant.monthpickersample;
 
 import android.app.DatePickerDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
         setNormalPicker();
 
-         // goto styles.xml and change the monthPickerStyles for below three layouts
+        // goto styles.xml and change the monthPickerStyles for below three layouts
 
         //setBottleView();
         //chooseMonthOnly();
@@ -34,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void setNormalPicker(){
+    private void setNormalPicker() {
         setContentView(R.layout.activity_main);
         final Calendar today = Calendar.getInstance();
         findViewById(R.id.month_picker).setOnClickListener(new View.OnClickListener() {
@@ -61,21 +59,21 @@ public class MainActivity extends AppCompatActivity {
                         //.showMonthOnly()
                         // .showYearOnly()
                         .setOnMonthChangedListener(new MonthPickerDialog.OnMonthChangedListener() {
-                        @Override
-                        public void onMonthChanged(int selectedMonth) {
-                            Log.d(TAG, "Selected month : " + selectedMonth);
-                            // Toast.makeText(MainActivity.this, " Selected month : " + selectedMonth, Toast.LENGTH_SHORT).show();
-                        }
+                            @Override
+                            public void onMonthChanged(int selectedMonth) {
+                                Log.d(TAG, "Selected month : " + selectedMonth);
+                                // Toast.makeText(MainActivity.this, " Selected month : " + selectedMonth, Toast.LENGTH_SHORT).show();
+                            }
                         })
-                            .setOnYearChangedListener(new MonthPickerDialog.OnYearChangedListener() {
-                        @Override
-                        public void onYearChanged(int selectedYear) {
-                            Log.d(TAG, "Selected year : " + selectedYear);
-                            // Toast.makeText(MainActivity.this, " Selected year : " + selectedYear, Toast.LENGTH_SHORT).show();
-                        }
-                         })
-                .build()
-                .show();
+                        .setOnYearChangedListener(new MonthPickerDialog.OnYearChangedListener() {
+                            @Override
+                            public void onYearChanged(int selectedYear) {
+                                Log.d(TAG, "Selected year : " + selectedYear);
+                                // Toast.makeText(MainActivity.this, " Selected year : " + selectedYear, Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .build()
+                        .show();
 
             }
         });
@@ -85,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Calendar cal = Calendar.getInstance();
                 DatePickerDialog dialog = new DatePickerDialog(MainActivity.this, null, 2017,
-                        cal.get(Calendar.MONTH),cal.get(Calendar.DATE));
+                        cal.get(Calendar.MONTH), cal.get(Calendar.DATE));
                 dialog.show();
             }
         });
@@ -112,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     int choosenYear = 2017;
+
     private void chooseYearOnly() {
         setContentView(R.layout.activity_choose_year);
 

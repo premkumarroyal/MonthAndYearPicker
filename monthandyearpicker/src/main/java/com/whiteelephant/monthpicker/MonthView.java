@@ -1,11 +1,11 @@
 package com.whiteelephant.monthpicker;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.widget.ListView;
@@ -66,8 +66,15 @@ class MonthView extends ListView {
                 16, displayMetrics);
         _monthHeaderSize = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                 16, displayMetrics);
-        _monthSelectedCircleSize = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-                43, displayMetrics);
+
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            _monthSelectedCircleSize = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+                    43, displayMetrics);
+        } else {
+            _monthSelectedCircleSize = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+                    43, displayMetrics);
+        }
+
         _rowHeightKey = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                 250, displayMetrics);
         _rowHeight = (_rowHeightKey - _monthHeaderSize) / MAX_NUM_ROWS;

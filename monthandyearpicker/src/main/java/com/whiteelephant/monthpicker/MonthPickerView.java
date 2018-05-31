@@ -1,7 +1,7 @@
 package com.whiteelephant.monthpicker;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
+import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.os.Build;
 import android.util.AttributeSet;
@@ -9,7 +9,6 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -20,7 +19,6 @@ import com.example.prem.firstpitch.R;
 
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.Locale;
 
 class MonthPickerView extends FrameLayout {
 
@@ -58,7 +56,8 @@ class MonthPickerView extends FrameLayout {
         LayoutInflater mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         mInflater.inflate(R.layout.month_picker_view, this);
 
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.monthPickerDialog, defStyleAttr, 0);
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.monthPickerDialog,
+                defStyleAttr, 0);
 
         // getting default values based on the user's theme.
 
@@ -147,7 +146,8 @@ class MonthPickerView extends FrameLayout {
                 headerBgColor = android.R.attr.colorAccent;
             } else {
                 //Get colorAccent defined for AppCompat
-                headerBgColor = context.getResources().getIdentifier("colorAccent", "attr", context.getPackageName());
+                headerBgColor = context.getResources().getIdentifier("colorAccent",
+                        "attr", context.getPackageName());
             }
             TypedValue outValue = new TypedValue();
             context.getTheme().resolveAttribute(headerBgColor, outValue, true);
@@ -160,7 +160,8 @@ class MonthPickerView extends FrameLayout {
                 monthBgSelectedColor = android.R.attr.colorAccent;
             } else {
                 //Get colorAccent defined for AppCompat
-                monthBgSelectedColor = context.getResources().getIdentifier("colorAccent", "attr", context.getPackageName());
+                monthBgSelectedColor = context.getResources().getIdentifier("colorAccent",
+                        "attr", context.getPackageName());
             }
             TypedValue outValue = new TypedValue();
             context.getTheme().resolveAttribute(monthBgSelectedColor, outValue, true);
@@ -414,5 +415,17 @@ class MonthPickerView extends FrameLayout {
     }
     public interface OnCancel{
         void onCancel();
+    }
+
+    MonthPickerDialog.OnConfigChangeListener configChangeListener;
+
+    protected void setOnConfigurationChanged(MonthPickerDialog.OnConfigChangeListener configChangeListener){
+        this.configChangeListener = configChangeListener;
+    }
+
+    @Override
+    protected void onConfigurationChanged(Configuration newConfig) {
+        configChangeListener.onConfigChange();
+        super.onConfigurationChanged(newConfig);
     }
 }
