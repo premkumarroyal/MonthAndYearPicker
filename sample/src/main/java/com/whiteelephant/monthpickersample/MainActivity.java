@@ -1,6 +1,8 @@
 package com.whiteelephant.monthpickersample;
 
 import android.app.DatePickerDialog;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -12,6 +14,7 @@ import android.widget.Toast;
 import com.whiteelephant.monthpicker.MonthPickerDialog;
 
 import java.util.Calendar;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //applyLocale();
+
         setNormalPicker();
 
         // goto styles.xml and change the monthPickerStyles for below three layouts
@@ -28,9 +33,19 @@ public class MainActivity extends AppCompatActivity {
         //setBottleView();
         //chooseMonthOnly();
         //chooseYearOnly();
-
     }
 
+
+    /*private void applyLocale() {
+        Locale locale = new Locale("es");
+        Locale.setDefault(locale);
+
+        Resources res = getResources();
+        Configuration config = new Configuration(res.getConfiguration());
+        config.locale = locale;
+        getBaseContext().getResources().updateConfiguration(config,
+                getBaseContext().getResources().getDisplayMetrics());
+    }*/
 
     private void setNormalPicker() {
         setContentView(R.layout.activity_main);
