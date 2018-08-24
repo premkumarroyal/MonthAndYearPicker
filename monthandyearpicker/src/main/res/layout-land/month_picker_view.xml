@@ -38,7 +38,8 @@
                     android:paddingLeft="24dp"
                     android:paddingRight="24dp"
                     android:paddingTop="10dp"
-                    android:text="OK"
+                    android:text="@string/dialog_action_btn_ok"
+                    android:textAllCaps="true"
                     android:textStyle="bold" />
 
                 <TextView
@@ -50,7 +51,8 @@
                     android:paddingLeft="24dp"
                     android:paddingRight="24dp"
                     android:paddingTop="10dp"
-                    android:text="CANCEL"
+                    android:textAllCaps="true"
+                    android:text="@string/dialog_action_btn_cancel"
                     android:textStyle="bold" />
             </RelativeLayout>
 

@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name="months">
-        <item>"JAN"</item>
-        <item>"FEB"</item>
-        <item>"MAR"</item>
-        <item>"APR"</item>
-        <item>"MAY"</item>
-        <item>"JUN"</item>
-        <item>"JUL"</item>
-        <item>"AUG"</item>
-        <item>"SEP"</item>
-        <item>"OCT"</item>
-        <item>"NOV"</item>
-        <item>"DEC"</item>
+        <item>@string/jan</item>
+        <item>@string/feb</item>
+        <item>@string/mar</item>
+        <item>@string/apr</item>
+        <item>@string/may</item>
+        <item>@string/jun</item>
+        <item>@string/jul</item>
+        <item>@string/aug</item>
+        <item>@string/sep</item>
+        <item>@string/oct</item>
+        <item>@string/nov</item>
+        <item>@string/dec</item>
     </array>
 </resources>
