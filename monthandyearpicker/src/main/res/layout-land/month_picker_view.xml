@@ -38,7 +38,7 @@
                     android:paddingLeft="24dp"
                     android:paddingRight="24dp"
                     android:paddingTop="10dp"
-                    android:text="@string/dialog_action_btn_ok"
+                    android:text="@android:string/ok"
                     android:textAllCaps="true"
                     android:textStyle="bold" />
 
@@ -52,7 +52,7 @@
                     android:paddingRight="24dp"
                     android:paddingTop="10dp"
                     android:textAllCaps="true"
-                    android:text="@string/dialog_action_btn_cancel"
+                    android:text="@android:string/cancel"
                     android:textStyle="bold" />
             </RelativeLayout>
 

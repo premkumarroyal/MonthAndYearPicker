@@ -36,8 +36,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    /*private void applyLocale() {
-        Locale locale = new Locale("es");
+    private void applyLocale() {
+        Locale locale = new Locale("hi");
         Locale.setDefault(locale);
 
         Resources res = getResources();
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         config.locale = locale;
         getBaseContext().getResources().updateConfiguration(config,
                 getBaseContext().getResources().getDisplayMetrics());
-    }*/
+    }
 
     private void setNormalPicker() {
         setContentView(R.layout.activity_main);
