@@ -17,8 +17,10 @@ import android.widget.TextView;
 
 import com.example.prem.firstpitch.R;
 
+import java.text.DateFormatSymbols;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Locale;
 
 class MonthPickerView extends FrameLayout {
 
@@ -35,6 +37,8 @@ class MonthPickerView extends FrameLayout {
     MonthPickerDialog.OnMonthChangedListener _onMonthChanged;
     OnDateSet _onDateSet;
     OnCancel _onCancel;
+    private String[] _monthNames;
+
     /*private static final int[] ATTRS_TEXT_COLOR = new int[] {
             com.android.internal.R.attr.textColor};
     private static final int[] ATTRS_DISABLED_ALPHA = new int[] {
@@ -55,6 +59,7 @@ class MonthPickerView extends FrameLayout {
         _context = context;
         LayoutInflater mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         mInflater.inflate(R.layout.month_picker_view, this);
+        _monthNames = new DateFormatSymbols(Locale.getDefault()).getShortMonths();
 
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.monthPickerDialog,
                 defStyleAttr, 0);
@@ -234,7 +239,7 @@ class MonthPickerView extends FrameLayout {
             public void onDaySelected(MonthViewAdapter view, int selectedMonth) {
                 Log.d("----------------", "MonthPickerDialogStyle selected month = " + selectedMonth);
                 MonthPickerView.this._selectedMonth = selectedMonth;
-                _month.setText(_context.getResources().getStringArray(R.array.months)[selectedMonth]);
+                _month.setText(_monthNames[selectedMonth]);
                 if (!_showMonthOnly) {
                     _monthList.setVisibility(View.GONE);
                     _yearView.setVisibility(View.VISIBLE);
@@ -337,7 +342,7 @@ class MonthPickerView extends FrameLayout {
     protected void setActivatedMonth(int activatedMonth) {
         if (activatedMonth >= Calendar.JANUARY && activatedMonth <= Calendar.DECEMBER) {
             _monthViewAdapter.setActivatedMonth(activatedMonth);
-           _month.setText(_context.getResources().getStringArray(R.array.months)[activatedMonth]);
+           _month.setText(_monthNames[activatedMonth]);
         } else {
             throw new IllegalArgumentException("Month out of range please send months between Calendar.JANUARY, Calendar.DECEMBER");
         }

@@ -4,22 +4,4 @@
     <string name="label_month">MONTH</string>
     <string name="label_year">YEAR</string>
 
-
-    <string name="dialog_action_btn_ok">OK</string>
-    <string name="dialog_action_btn_cancel">Cancel</string>
-
-    <!--Month names-->
-    <string name="jan">"JAN"</string>
-    <string name="feb">"FEB"</string>
-    <string name="mar">"MAR"</string>
-    <string name="apr">"APR"</string>
-    <string name="may">"MAY"</string>
-    <string name="jun">"JUN"</string>
-    <string name="jul">"JUL"</string>
-    <string name="aug">"AUG"</string>
-    <string name="sep">"SEP"</string>
-    <string name="oct">"OCT"</string>
-    <string name="nov">"NOV"</string>
-    <string name="dec">"DEC"</string>
-
 </resources>

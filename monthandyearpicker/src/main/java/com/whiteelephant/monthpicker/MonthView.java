@@ -12,7 +12,9 @@ import android.widget.ListView;
 
 import com.example.prem.firstpitch.R;
 
+import java.text.DateFormatSymbols;
 import java.util.HashMap;
+import java.util.Locale;
 
 class MonthView extends ListView {
 
@@ -35,7 +37,7 @@ class MonthView extends ListView {
     private Paint _monthNumberDisabledPaint;
     private Paint _monthNumberSelectedPaint;
     // month
-    private String[] _monthNames = getResources().getStringArray(R.array.months);
+    private String[] _monthNames;
     private int _monthTextSize;
     private int _monthHeaderSize;
     private int _monthSelectedCircleSize;
@@ -59,6 +61,8 @@ class MonthView extends ListView {
 
     public MonthView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+
+        _monthNames = new DateFormatSymbols(Locale.getDefault()).getShortMonths();
 
         DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
 
@@ -130,7 +134,6 @@ class MonthView extends ListView {
         int dayWidthHalf = (_width - _padding * 2) / (_numDays * 2);
         int j = 0;
         for (int month = 0; month < _monthNames.length; month++) {
-            //  Log.d("-------loop", " i = "+month+", _monthNames[i] = "+ _monthNames[month] +" , _selectedMonth "+_selectedMonth );
             int x = (2 * j + 1) * dayWidthHalf + _padding;
             if (_selectedMonth == month) {
                 canvas.drawCircle(x, y - (_monthTextSize / 3), _monthSelectedCircleSize, _monthNumberSelectedPaint);
