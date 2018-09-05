@@ -85,14 +85,14 @@ Month and Year picker by default pick the color from theme if you declared color
 
 Add Gradle Dependency in your build.gradle file
 
-    compile 'com.whiteelephant:monthandyearpicker:1.2.1'
+    compile 'com.whiteelephant:monthandyearpicker:1.3.0'
 
 or Maven
 
     <dependency>
       <groupId>com.whiteelephant</groupId>
       <artifactId>monthandyearpicker</artifactId>
-      <version>1.2.0</version>
+      <version>1.3.0</version>
       <type>pom</type>   
     </dependency>
    
