@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.example.prem.firstpitch.R;
 
+import java.util.Collections;
 import java.util.HashMap;
 
 
@@ -26,6 +27,7 @@ class YearPickerView extends ListView {
     final int _childSize;
     OnYearSelectedListener _onYearSelectedListener;
     HashMap<String, Integer> _colors;
+    boolean _reverseOrder;
 
     public YearPickerView(Context context) {
         this(context, null);
@@ -74,9 +76,7 @@ class YearPickerView extends ListView {
             @Override
             public void run() {
                 final int position = _adapter.getPositionForYear(year);
-                if (position >= 0 /*&& position < getCount()*/) {
-                    setSelectionCentered(position);
-                }
+                setSelectionCentered(Math.abs(position));
             }
         });
     }
@@ -92,6 +92,10 @@ class YearPickerView extends ListView {
 
     public void setColors(HashMap<String, Integer> colors) {
         this._colors = colors;
+    }
+
+    public void setReverseYearOrder(boolean reverseOrder) {
+        this._reverseOrder = reverseOrder;
     }
 
     private class YearAdapter extends BaseAdapter {
@@ -139,11 +143,17 @@ class YearPickerView extends ListView {
         }
 
         public int getPositionForYear(int year) {
-            return year - __minYear;
+            if(_reverseOrder)
+                return year - __maxYear;
+            else
+                return year - __minYear;
         }
 
         public int getYearForPosition(int position) {
-            return __minYear + position;
+            if(_reverseOrder)
+                return __maxYear - position;
+            else
+                return __minYear + position;
         }
 
         @Override

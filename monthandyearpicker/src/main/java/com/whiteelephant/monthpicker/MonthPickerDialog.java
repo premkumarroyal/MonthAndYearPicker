@@ -179,6 +179,8 @@ public class MonthPickerDialog extends AlertDialog implements OnClickListener, O
         _monthPicker.showYearOnly();
     }
 
+    private void setReverseYearOrder(boolean reverseOrder) { _monthPicker.setReverseYearOrder(reverseOrder); }
+
     private void setOnMonthChangedListener(OnMonthChangedListener onMonthChangedListener) {
         if (onMonthChangedListener != null) {
             _monthPicker.setOnMonthChangedListener(onMonthChangedListener);
@@ -204,6 +206,7 @@ public class MonthPickerDialog extends AlertDialog implements OnClickListener, O
         private MonthPickerDialog monthPickerDialog;
         private OnYearChangedListener _onYearChanged;
         private OnMonthChangedListener _onMonthChanged;
+        private boolean _reverseOrder = false;
 
 
         /**
@@ -479,6 +482,16 @@ public class MonthPickerDialog extends AlertDialog implements OnClickListener, O
             return this;
         }
 
+        /**
+         * User can reverse the order of the years to display. Default is false.
+         *
+         * @return Builder
+         */
+        public Builder setReverseYearOrder(boolean reverseOrder) {
+            this._reverseOrder = reverseOrder;
+            return this;
+        }
+
         public MonthPickerDialog build() {
 
             if (_minMonth > _maxMonth) {
@@ -511,6 +524,7 @@ public class MonthPickerDialog extends AlertDialog implements OnClickListener, O
                 _activatedYear = 0;
             } else if (yearOnly) {
                 monthPickerDialog.showYearOnly();
+                monthPickerDialog.setReverseYearOrder(_reverseOrder);
                 _minMonth = 0;
                 _maxMonth = 0;
                 _activatedMonth = 0;
