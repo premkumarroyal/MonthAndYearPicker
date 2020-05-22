@@ -406,7 +406,7 @@ class MonthPickerView extends FrameLayout {
         }
     }
 
-    protected void setReverseYearOrder(Boolean reverseOrder) {
+    protected void setReverseYearOrder(boolean reverseOrder) {
         _yearView.setReverseYearOrder(reverseOrder);
     }
 

@@ -27,7 +27,7 @@ class YearPickerView extends ListView {
     final int _childSize;
     OnYearSelectedListener _onYearSelectedListener;
     HashMap<String, Integer> _colors;
-    Boolean _reverseOrder;
+    boolean _reverseOrder;
 
     public YearPickerView(Context context) {
         this(context, null);
@@ -94,7 +94,7 @@ class YearPickerView extends ListView {
         this._colors = colors;
     }
 
-    public void setReverseYearOrder(Boolean reverseOrder) {
+    public void setReverseYearOrder(boolean reverseOrder) {
         this._reverseOrder = reverseOrder;
     }
 
